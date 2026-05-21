@@ -1,0 +1,81 @@
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ─── Archive Section ─── */
+.archiveSection {
+  padding: 100px 0;
+  background: #fdfdfd;
+}
+
+.archiveHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+}
+
+.sectionTag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #DC5DA3;
+  padding: 6px 16px;
+  background: rgba(220, 93, 163, 0.1);
+  border-radius: 100px;
+  margin-bottom: 12px;
+}
+
+.sectionTitle {
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 900;
+  color: #000;
+  line-height: 1.1;
+}
+
+.carouselControls {
+  display: flex;
+  gap: 10px;
+}
+
+.controlBtn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1.5px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  transition: all 0.25s;
+}
+
+.controlBtn:hover {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+.carouselWrap {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding-bottom: 8px;
+}
+
+.carouselWrap > div {
+  width: 330px !important;
+  flex-shrink: 0 !important;
+}
+
+.carouselWrap::-webkit-scrollbar {
+  display: none;
+}

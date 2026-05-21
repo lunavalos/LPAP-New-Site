@@ -1,0 +1,115 @@
+.successPage {
+  padding: 160px 20px 100px;
+  background: #fdfdfd;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.card {
+  background: #fff;
+  padding: 60px 40px;
+  border-radius: 32px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  border: 1px solid #f0f0f0;
+}
+
+.icon {
+  color: #00c853;
+  margin-bottom: 32px;
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 900;
+  margin-bottom: 16px;
+  color: #111;
+}
+
+.subtitle {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.orderNumber {
+  background: #f4f7fa;
+  padding: 16px 24px;
+  border-radius: 16px;
+  display: inline-flex;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.orderNumber span {
+  color: #888;
+}
+
+.orderNumber strong {
+  color: #111;
+  font-weight: 800;
+}
+
+.info {
+  border-top: 1px solid #f0f0f0;
+  padding-top: 32px;
+  margin-bottom: 40px;
+  color: #888;
+  font-size: 14px;
+}
+
+.statusNote {
+  margin-top: 12px;
+  color: #f4852b;
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .actions {
+    flex-direction: column;
+  }
+}
+
+.primaryBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 32px;
+  background: #111;
+  color: #fff;
+  border-radius: 16px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.primaryBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.secondaryBtn {
+  padding: 16px 32px;
+  background: #f4f7fa;
+  color: #111;
+  border-radius: 16px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.secondaryBtn:hover {
+  background: #eef2f8;
+}

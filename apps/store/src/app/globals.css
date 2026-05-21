@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
+:root {
+  /* Brand Colors */
+  --primary: #F4852B;       /* Naranja LPAP */
+  --primary-hover: #D76F1D;
+  --secondary: #499FD0;     /* Azul LPAP */
+  --secondary-hover: #3687B4;
+  --accent: #DC5DA3;        /* Rosa LPAP */
+  --accent-hover: #C5478D;
+  
+  /* Neutral Colors */
+  --text: #1B1B1B;
+  --text-muted: #555555;
+  --text-light: #888888;
+  --bg: #FBFBFD;            /* Blanco Roto Premium */
+  --bg-white: #FFFFFF;
+  --bg-soft: #F4F5F7;
+  --border: rgba(0, 0, 0, 0.06);
+  --border-light: rgba(0, 0, 0, 0.03);
+
+  /* Layout and UI */
+  --border-radius-sm: 8px;
+  --border-radius: 16px;
+  --border-radius-lg: 24px;
+  --border-radius-full: 9999px;
+  --max-width: 1200px;
+  
+  /* Transitions & Animation Curves */
+  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: all 0.2s ease;
+}
+
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Lato', sans-serif;
+  color: var(--text);
+  background-color: var(--bg);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+/* Typography Scale */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition-fast);
+}
+
+ul {
+  list-style: none;
+}
+
+/* Grid & Layout Utilities */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+section {
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-soft);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Global Transition classes */
+.hover-lift {
+  transition: var(--transition-smooth);
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+}

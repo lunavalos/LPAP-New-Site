@@ -1,0 +1,139 @@
+/* ── Featured Products Carousel — light gray background ── */
+.section {
+  background: #f8f8f8;
+  padding: 120px 0;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(0,0,0,0.04);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 48px;
+  gap: 40px;
+}
+
+.headerLeft {
+  flex: 1;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  font-size: clamp(32px, 4.5vw, 48px);
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.titleAccent {
+  color: var(--primary);
+}
+
+.headerText {
+  font-size: 15.5px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-top: 12px;
+  max-width: 100%;
+}
+
+.seeAll {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--primary);
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.seeAll:hover {
+  color: var(--primary-hover);
+}
+
+.carouselWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  /* Extra horizontal space so arrows don't overlap cards */
+  margin: 0 -28px;
+  padding: 0 28px;
+}
+
+.navBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid #e5e7eb;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+}
+
+.navBtn:hover {
+  background: var(--accent, #DC5DA3);
+  color: #fff;
+  border-color: var(--accent, #DC5DA3);
+  box-shadow: 0 6px 20px rgba(220, 93, 163, 0.3);
+  transform: scale(1.05);
+}
+
+.navLeft {
+  margin-right: 12px;
+}
+
+.navRight {
+  margin-left: 12px;
+}
+
+/* ── Carousel track container ── */
+.carouselContainer {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  width: 100%;
+  padding: 10px 4px 32px; /* Bottom padding so card hover shadow isn't clipped */
+}
+
+.carouselContainer > div {
+  width: 330px !important;
+  flex-shrink: 0 !important;
+}
+
+.carouselContainer::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .headerRight {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .navBtn {
+    display: none; /* Hide absolute arrows on mobile since users can simply swipe */
+  }
+}

@@ -1,0 +1,349 @@
+/* ─── Nosotros Page Stylesheet ─────────────────────────── */
+
+/* Hero Section */
+.hero {
+  position: relative;
+  min-height: 425px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #001233;
+  color: #fff;
+  overflow: hidden;
+  padding-top: 140px;
+  padding-bottom: 60px;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 18, 51, 0.9) 0%, rgba(220, 93, 163, 0.45) 100%);
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.heroTag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: #fff;
+  background: rgba(220, 93, 163, 0.35);
+  padding: 6px 18px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(220, 93, 163, 0.55);
+}
+
+.heroTitle {
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 18px;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.heroAccent {
+  color: var(--accent);
+}
+
+.heroSub {
+  font-size: clamp(14px, 1.8vw, 17px);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.7;
+  max-width: 620px;
+  margin: 0 auto;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ─── Commitment Section ──────────────────────────────── */
+.commitmentSection {
+  padding: 100px 0;
+  background: #ffffff;
+}
+
+.grid2Col {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 80px;
+  align-items: center;
+}
+
+@media (max-width: 968px) {
+  .grid2Col {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+.tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent);
+  background: rgba(220, 93, 163, 0.08);
+  padding: 6px 16px;
+  border-radius: 100px;
+  margin-bottom: 16px;
+}
+
+.sectionTitle {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+
+.sectionTitleAccent {
+  color: var(--primary);
+}
+
+.aboutText {
+  color: var(--text-muted);
+  font-size: 17px;
+  line-height: 1.85;
+}
+
+.aboutText p {
+  margin-bottom: 20px;
+}
+
+.aboutText p:last-child {
+  margin-bottom: 0;
+}
+
+.imageWrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logoCard {
+  background: #fdfdfd;
+  border-radius: 32px;
+  padding: 20px 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.logoCard:hover {
+  transform: translateY(-8px) scale(1.02);
+}
+
+.logoImage {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 32px;
+}
+
+.decorBlob {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(220, 93, 163, 0.15) 0%, rgba(220, 93, 163, 0) 70%);
+  top: -40px;
+  right: -40px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ─── Pillars Section (Misión, Visión, Valores) ────────── */
+.pillarsSection {
+  padding: 120px 0;
+  background: #f8fbff;
+}
+
+.grid3Col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+@media (max-width: 1024px) {
+  .grid3Col {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.pillarCard {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 44px 36px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.pillarCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+.iconWrap {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.cardTitle {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  margin-bottom: 18px;
+}
+
+.cardText {
+  color: var(--text-muted);
+  font-size: 15.5px;
+  line-height: 1.75;
+  flex: 1;
+}
+
+.cardText p {
+  margin-bottom: 14px;
+}
+
+.cardText p:last-child {
+  margin-bottom: 0;
+}
+
+/* Values Grid inside card */
+.valuesList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.valueItem {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.valueDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  margin-top: 8px;
+  flex-shrink: 0;
+}
+
+.valueContent strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.valueContent span {
+  display: block;
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ─── Call to Action (CTA) ───────────────────────────── */
+.ctaSection {
+  padding: 100px 0;
+  background: linear-gradient(135deg, #f4852b 0%, #dc5da3 100%);
+  color: #fff;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.ctaTitle {
+  font-size: clamp(30px, 4vw, 48px);
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 18px;
+  letter-spacing: -0.02em;
+}
+
+.ctaSub {
+  font-size: clamp(15px, 1.8vw, 18px);
+  color: rgba(255, 255, 255, 0.95);
+  max-width: 680px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+
+.ctaActions {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ctaBtnWhite {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  color: var(--primary);
+  padding: 16px 36px;
+  border-radius: 16px;
+  font-weight: 800;
+  font-size: 15px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.ctaBtnWhite:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  background: #fff;
+  color: var(--primary-hover);
+}
+
+.ctaBtnOutline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  color: #ffffff;
+  padding: 14px 34px;
+  border-radius: 16px;
+  font-weight: 800;
+  font-size: 15px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ctaBtnOutline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}

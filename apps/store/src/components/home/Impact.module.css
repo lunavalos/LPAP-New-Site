@@ -1,0 +1,112 @@
+/* ── Impact — full-bleed naranja con texto blanco ── */
+.section {
+  background: var(--primary);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Texture dots */
+.section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+  position: relative;
+  z-index: 1;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 6px 18px;
+  border-radius: 100px;
+  margin-bottom: 18px;
+}
+
+.title {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+/* ── Stats grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.statCard {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 48px 32px;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+.statCard:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.statIcon {
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.number {
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 10px;
+  letter-spacing: -0.03em;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.sub {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.5;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

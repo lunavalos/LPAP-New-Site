@@ -1,0 +1,263 @@
+.section {
+  padding: 80px 0;
+  background: #fdfdfd;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decoración superior con colores de la marca */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--accent, #DC5DA3) 0%, var(--primary, #f4852b) 100%);
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111130;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.description {
+  font-size: 15px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.legend {
+  font-size: 18px;
+  font-weight: 800;
+  color: #111130;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #f3f4f6;
+  margin-bottom: 4px;
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #444;
+  letter-spacing: 0.2px;
+}
+
+.input,
+.select,
+.textarea {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 15px;
+  color: #111;
+  outline: none;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  background: #fff;
+  border-color: var(--accent, #DC5DA3);
+  box-shadow: 0 0 0 4px rgba(220, 93, 163, 0.1);
+}
+
+.checkboxContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #444;
+  cursor: pointer;
+  background: #f9fafb;
+  padding: 10px 14px;
+  border-radius: 100px;
+  border: 1px solid #e5e7eb;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.checkboxLabel:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.checkboxInput {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #d1d5db;
+  border-radius: 6px;
+  outline: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative;
+  background: #fff;
+}
+
+.checkboxInput:checked {
+  background: var(--accent, #DC5DA3);
+  border-color: var(--accent, #DC5DA3);
+}
+
+.checkboxInput:checked::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkboxLabelChecked {
+  background: rgba(220, 93, 163, 0.05);
+  border-color: rgba(220, 93, 163, 0.3);
+  color: var(--accent, #DC5DA3);
+  font-weight: 600;
+}
+
+.button {
+  background: linear-gradient(135deg, var(--accent, #DC5DA3) 0%, #c44d91 100%);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(220, 93, 163, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(220, 93, 163, 0.35);
+}
+
+.button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Success Card */
+.successCard {
+  text-align: center;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.successIcon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(46, 204, 113, 0.1);
+  color: #2ecc71;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  animation: scaleUp 0.5s ease-out;
+}
+
+.successTitle {
+  font-size: 26px;
+  font-weight: 800;
+  color: #111130;
+  margin: 0;
+}
+
+.successMessage {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.7;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

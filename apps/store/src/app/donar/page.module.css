@@ -1,0 +1,400 @@
+.main {
+  background: #fbfbfd;
+  color: var(--text);
+  padding: 140px 0 100px;
+}
+
+/* ── Hero Section ── */
+.hero {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 80px;
+  padding: 0 20px;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent);
+  background: rgba(220, 93, 163, 0.08);
+  border: 1px solid rgba(220, 93, 163, 0.15);
+  padding: 6px 16px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+
+.titleAccent {
+  color: var(--primary);
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ── Main Donation Methods grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 24px;
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+.paypalCard:hover {
+  border-color: rgba(73, 159, 208, 0.3);
+}
+
+.mpCard:hover {
+  border-color: rgba(244, 133, 43, 0.3);
+}
+
+.iconWrap {
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.paypalIcon {
+  background: rgba(73, 159, 208, 0.1);
+  color: var(--secondary);
+}
+
+.mpIcon {
+  background: rgba(244, 133, 43, 0.1);
+  color: var(--primary);
+}
+
+.cardTitle {
+  font-size: 24px;
+  font-weight: 900;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.cardDesc {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 36px;
+  flex: 1;
+}
+
+.btn {
+  width: 100%;
+  height: 52px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btnPaypal {
+  background: var(--secondary);
+}
+
+.btnPaypal:hover {
+  background: var(--secondary-hover);
+  box-shadow: 0 8px 24px rgba(73, 159, 208, 0.3);
+}
+
+.btnMp {
+  background: var(--primary);
+}
+
+.btnMp:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 8px 24px rgba(244, 133, 43, 0.3);
+}
+
+/* ── Suggested Amounts Interactive Widget ── */
+.widgetSection {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 24px;
+  padding: 48px;
+  margin-bottom: 80px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.01);
+}
+
+.widgetHeader {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.widgetTitle {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.widgetDesc {
+  font-size: 14.5px;
+  color: var(--text-muted);
+}
+
+.amountsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 36px;
+}
+
+.amountBtn {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.amountBtn:hover {
+  border-color: var(--accent);
+  background: #fff;
+  transform: translateY(-2px);
+}
+
+.amountBtnActive {
+  background: rgba(220, 93, 163, 0.06);
+  border-color: var(--accent);
+  box-shadow: 0 6px 16px rgba(220, 93, 163, 0.12);
+}
+
+.amountVal {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.amountBtnActive .amountVal {
+  color: var(--accent);
+}
+
+.amountLabel {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-light);
+  letter-spacing: 0.5px;
+}
+
+.impactBox {
+  background: var(--bg-soft);
+  border-radius: 16px;
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: all 0.3s ease;
+}
+
+.impactIcon {
+  color: var(--accent);
+  background: #fff;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.impactText {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* ── SPEI Bank details block ── */
+.speiSection {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 48px;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 60px;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.speiLeft {}
+
+.speiTitle {
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.speiDesc {
+  font-size: 14.5px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.speiBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--secondary);
+  background: rgba(73, 159, 208, 0.08);
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.speiTable {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.speiRow {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.speiLabel {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--text-light);
+  letter-spacing: 0.5px;
+}
+
+.speiVal {
+  font-size: 14.5px;
+  font-weight: 800;
+  color: var(--text);
+  font-family: monospace;
+}
+
+.copyBtn {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.copyBtn:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.copiedText {
+  color: var(--accent) !important;
+  border-color: var(--accent) !important;
+  background: rgba(220, 93, 163, 0.05) !important;
+}
+
+/* ── Trust Block ── */
+.trustBlock {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.trustTitle {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.trustText {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .grid, .speiSection {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .amountsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .card {
+    padding: 32px 20px;
+  }
+  .speiSection, .widgetSection {
+    padding: 32px 20px;
+  }
+  .amountsGrid {
+    grid-template-columns: 1fr;
+  }
+}

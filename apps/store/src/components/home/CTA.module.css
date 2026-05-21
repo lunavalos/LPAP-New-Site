@@ -1,0 +1,294 @@
+/* ── CTA Donate — clean white bg, big emotional layout ── */
+.section {
+  background: #fff;
+  padding: 120px 0;
+  border-top: 1px solid rgba(0,0,0,0.04);
+}
+
+/* ── Top: donate headline + methods ── */
+.topGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.topLeft {}
+
+.tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent);
+  background: rgba(220, 93, 163, 0.08);
+  padding: 6px 16px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+}
+
+.topTitle {
+  font-size: clamp(32px, 4.5vw, 54px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.topAccent {
+  color: var(--primary);
+}
+
+.topText {
+  font-size: 16px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 36px;
+  max-width: 520px;
+}
+
+.topActions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btnPink {
+  height: 50px;
+  padding: 0 32px;
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: #fff;
+  background: var(--accent);
+  border: 2px solid var(--accent);
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.btnPink:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(220, 93, 163, 0.28);
+}
+
+.btnOrange {
+  height: 50px;
+  padding: 0 32px;
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: #fff;
+  background: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.btnOrange:hover {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(244, 133, 43, 0.2);
+}
+
+/* ── Methods cards on the right ── */
+.methodsStack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.methodCard {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 24px;
+  background: #f8f8f8;
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 16px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: default;
+}
+
+.methodCard.linked {
+  cursor: pointer;
+}
+
+.methodCard.linked:hover {
+  background: #fff;
+  border-color: var(--accent);
+  transform: translateX(4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+}
+
+.methodIconWrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.methodInfo {
+  flex: 1;
+}
+
+.methodTitle {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.methodSub {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.methodArrow {
+  color: rgba(0,0,0,0.25);
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.methodCard.linked:hover .methodArrow {
+  color: var(--accent);
+}
+
+/* ── ESR Corporate Banner — now with clean white background ── */
+.esrBanner {
+  background: #fff;
+  padding: 120px 0;
+  border-top: 1px solid rgba(0,0,0,0.04);
+}
+
+.esrGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.esrTag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--primary);
+  background: rgba(244, 133, 43, 0.12);
+  padding: 6px 16px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+}
+
+.esrTitle {
+  font-size: clamp(30px, 4.5vw, 48px);
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.esrText {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.esrBtn {
+  height: 50px;
+  padding: 0 32px;
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: #fff;
+  background: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.esrBtn:hover {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(244, 133, 43, 0.25);
+}
+
+/* ESR points */
+.esrPoints {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.esrPoint {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.esrPointNum {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.esrPointTitle {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.esrPointText {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+@media (max-width: 1024px) {
+  .topGrid, .esrGrid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}

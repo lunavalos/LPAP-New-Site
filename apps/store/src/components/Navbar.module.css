@@ -1,0 +1,350 @@
+/* ── Outer wrapper: fixed + generous spacing ── */
+.navbarContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 18px 32px;
+  pointer-events: none; /* children re-enable */
+}
+
+/* ── Inner pill card ── */
+.navbarWrapper {
+  pointer-events: all;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 0 28px;
+  height: 60px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* ── Logo ── */
+.logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-right: 32px;
+}
+
+.logoImg {
+  height: 34px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logoText {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--secondary);
+  letter-spacing: -0.5px;
+}
+
+/* ── Center nav links ── */
+.navMenu {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.navLink {
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+  padding: 0 14px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: background 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+  letter-spacing: 0.1px;
+}
+
+.navLink:hover {
+  background: rgba(244, 133, 43, 0.1);
+  color: var(--primary);
+}
+
+/* ── Right actions ── */
+.navbarActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.desktopActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ── Cart button ── */
+.cartIconBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  transition: background 0.2s ease;
+  flex-shrink: 0;
+}
+
+.cartIconBtn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.cartBadge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 900;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+}
+
+/* ── Action buttons — outline style ── */
+.loginBtn {
+  height: 38px;
+  padding: 0 20px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text);
+  background: transparent;
+  border: 1.5px solid rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.loginBtn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: rgba(244, 133, 43, 0.04);
+}
+
+/* ── Orange filled: Iniciar Sesión ── */
+.orangeBtn {
+  height: 38px;
+  padding: 0 20px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #fff;
+  background: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.orangeBtn:hover {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(244, 133, 43, 0.25);
+}
+
+/* ── Pink filled: Donar ahora ── */
+.donateBtn {
+  height: 38px;
+  padding: 0 20px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #fff;
+  background: var(--accent);
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.donateBtn:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(220, 93, 163, 0.25);
+}
+
+/* ── Mobile toggle ── */
+.mobileToggle {
+  display: none;
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 10px;
+  color: var(--text);
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Mobile cart (small screens) ── */
+.cartIconBtnMobile {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  color: var(--text);
+}
+
+/* ── Mobile dropdown overlay ── */
+.mobileOverlay {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  z-index: 2000;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.overlayOpen {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.overlayContent {
+  padding: 24px;
+}
+
+.overlayNav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+
+.overlayLink {
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 700;
+  padding: 12px 14px;
+  border-radius: 10px;
+  transition: background 0.2s ease;
+  display: block;
+}
+
+.overlayLink:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.overlayFooter {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobileLoginBtn,
+.mobileDonateBtn {
+  width: 100%;
+  padding: 14px;
+  text-align: center;
+  border-radius: 12px;
+  font-weight: 900;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobileLoginBtn {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text);
+  border: none;
+}
+
+.mobileDonateBtn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .navMenu,
+  .desktopActions {
+    display: none;
+  }
+
+  .mobileToggle {
+    display: flex;
+  }
+
+  .cartIconBtnMobile {
+    display: flex;
+  }
+
+  .navbarWrapper {
+    position: relative;
+  }
+}
+
+@media (max-width: 640px) {
+  .navbarContainer {
+    padding: 12px 16px;
+  }
+}
