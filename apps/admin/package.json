@@ -1,0 +1,41 @@
+{
+  "name": "admin",
+  "version": "1.0.0",
+  "description": "Payload CMS Backend for LPAP",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "cross-env NEXT_DISABLE_TURBOPACK=1 next dev",
+    "dev:turbo": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "payload": "payload",
+    "generate:types": "payload generate:types",
+    "generate:importmap": "payload generate:importmap"
+  },
+  "dependencies": {
+    "@payloadcms/db-mongodb": "3.84.1",
+    "@payloadcms/next": "3.84.1",
+    "@payloadcms/plugin-seo": "^3.84.1",
+    "@payloadcms/richtext-lexical": "3.84.1",
+    "@payloadcms/ui": "3.84.1",
+    "cross-env": "^7.0.3",
+    "dotenv": "16.4.7",
+    "lucide-react": "^1.14.0",
+    "next": "15.2.9",
+    "payload": "3.84.1",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "sharp": "0.34.2"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.9",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "css-loader": "^7.1.4",
+    "style-loader": "^4.0.0",
+    "tsx": "^4.21.0",
+    "typescript": "5.7.3"
+  }
+}

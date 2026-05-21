@@ -1,0 +1,346 @@
+﻿{
+    "docs":  [
+                 {
+                     "createdAt":  "2026-05-14T17:34:25.195Z",
+                     "updatedAt":  "2026-05-14T17:34:25.198Z",
+                     "title":  "producto de ejemplo",
+                     "description":  "esto es una descripcion de ejemplo",
+                     "stock":  10,
+                     "price":  200,
+                     "category":  {
+                                      "createdAt":  "2026-05-07T16:08:24.172Z",
+                                      "updatedAt":  "2026-05-07T16:08:24.172Z",
+                                      "title":  "Accesorios",
+                                      "id":  "69fcb8f8ed1b817612b9088d"
+                                  },
+                     "images":  [
+                                    {
+                                        "image":  {
+                                                      "createdAt":  "2026-05-13T16:13:37.688Z",
+                                                      "updatedAt":  "2026-05-13T16:13:37.688Z",
+                                                      "alt":  "bazar-navideno",
+                                                      "url":  "/api/media/file/bazar-navideno.png",
+                                                      "filename":  "bazar-navideno.png",
+                                                      "mimeType":  "image/png",
+                                                      "filesize":  219746,
+                                                      "width":  400,
+                                                      "height":  400,
+                                                      "focalX":  50,
+                                                      "focalY":  50,
+                                                      "id":  "6a04a33193c07635a0384a3c",
+                                                      "thumbnailURL":  null
+                                                  },
+                                        "id":  "6a0607924860346b2df96abb"
+                                    }
+                                ],
+                     "variants":  [
+
+                                  ],
+                     "meta":  {
+
+                              },
+                     "id":  "6a0607a176e595ac8ab2180c",
+                     "featured":  false
+                 },
+                 {
+                     "createdAt":  "2026-05-07T16:32:20.670Z",
+                     "updatedAt":  "2026-05-07T16:32:20.671Z",
+                     "title":  "Termo LPAP",
+                     "description":  "Termo aislante de acero inoxidable con aditamento para tÃ© marca Norday.",
+                     "stock":  10,
+                     "price":  650,
+                     "category":  {
+                                      "createdAt":  "2026-05-07T16:09:31.911Z",
+                                      "updatedAt":  "2026-05-07T16:09:31.911Z",
+                                      "title":  "Termos y bebidas",
+                                      "id":  "69fcb93bed1b817612b908c3"
+                                  },
+                     "images":  [
+                                    {
+                                        "image":  {
+                                                      "createdAt":  "2026-05-07T16:32:01.594Z",
+                                                      "updatedAt":  "2026-05-07T16:32:01.594Z",
+                                                      "alt":  "termo",
+                                                      "url":  "/api/media/file/img_4245-scaled.webp",
+                                                      "filename":  "img_4245-scaled.webp",
+                                                      "mimeType":  "image/webp",
+                                                      "filesize":  80540,
+                                                      "width":  1832,
+                                                      "height":  2560,
+                                                      "focalX":  50,
+                                                      "focalY":  50,
+                                                      "id":  "69fcbe81ed1b817612b90b39",
+                                                      "thumbnailURL":  null
+                                                  },
+                                        "id":  "69fcbe4f8bddc7dd7a1d2305"
+                                    }
+                                ],
+                     "variants":  [
+
+                                  ],
+                     "meta":  {
+                                  "title":  "Termo LPAP",
+                                  "description":  "Termo aislante de acero inoxidable con aditamento para tÃ© marca Norday.",
+                                  "image":  {
+                                                "createdAt":  "2026-05-07T16:32:01.594Z",
+                                                "updatedAt":  "2026-05-07T16:32:01.594Z",
+                                                "alt":  "termo",
+                                                "url":  "/api/media/file/img_4245-scaled.webp",
+                                                "filename":  "img_4245-scaled.webp",
+                                                "mimeType":  "image/webp",
+                                                "filesize":  80540,
+                                                "width":  1832,
+                                                "height":  2560,
+                                                "focalX":  50,
+                                                "focalY":  50,
+                                                "id":  "69fcbe81ed1b817612b90b39",
+                                                "thumbnailURL":  null
+                                            }
+                              },
+                     "id":  "69fcbe94ed1b817612b90b5d",
+                     "featured":  false
+                 },
+                 {
+                     "createdAt":  "2026-05-07T16:29:44.585Z",
+                     "updatedAt":  "2026-05-07T16:29:44.586Z",
+                     "title":  "Libro Â«Toda va a estar bienÂ»",
+                     "description":  "Libro en EspaÃ±ol de la autora Nayeli PereznegrÃ³n. Conoce la bella historia de una madre y su hijo, que inicio un movimiento que ha cambiado la vida de miles de personas.",
+                     "stock":  10,
+                     "price":  350,
+                     "category":  {
+                                      "createdAt":  "2026-05-07T16:08:00.150Z",
+                                      "updatedAt":  "2026-05-07T16:08:00.150Z",
+                                      "title":  "Libros",
+                                      "id":  "69fcb8e0ed1b817612b9087b"
+                                  },
+                     "images":  [
+                                    {
+                                        "image":  {
+                                                      "createdAt":  "2026-05-07T16:29:23.937Z",
+                                                      "updatedAt":  "2026-05-07T16:29:23.937Z",
+                                                      "alt":  "libro 1",
+                                                      "url":  "/api/media/file/Libro-1.webp",
+                                                      "filename":  "Libro-1.webp",
+                                                      "mimeType":  "image/webp",
+                                                      "filesize":  52132,
+                                                      "width":  1000,
+                                                      "height":  1500,
+                                                      "focalX":  50,
+                                                      "focalY":  50,
+                                                      "id":  "69fcbde3ed1b817612b90aab",
+                                                      "thumbnailURL":  null
+                                                  },
+                                        "id":  "69fcbda28bddc7dd7a1d2303"
+                                    }
+                                ],
+                     "variants":  [
+
+                                  ],
+                     "meta":  {
+                                  "title":  "Libro Â«Toda va a estar bienÂ»",
+                                  "description":  "Libro en EspaÃ±ol de la autora Nayeli PereznegrÃ³n. Conoce la bella historia de una madre y su hijo, que inicio un movimiento que ha cambiado la vida de miles de personas.",
+                                  "image":  {
+                                                "createdAt":  "2026-05-07T16:29:23.937Z",
+                                                "updatedAt":  "2026-05-07T16:29:23.937Z",
+                                                "alt":  "libro 1",
+                                                "url":  "/api/media/file/Libro-1.webp",
+                                                "filename":  "Libro-1.webp",
+                                                "mimeType":  "image/webp",
+                                                "filesize":  52132,
+                                                "width":  1000,
+                                                "height":  1500,
+                                                "focalX":  50,
+                                                "focalY":  50,
+                                                "id":  "69fcbde3ed1b817612b90aab",
+                                                "thumbnailURL":  null
+                                            }
+                              },
+                     "id":  "69fcbdf8ed1b817612b90ace",
+                     "featured":  false
+                 },
+                 {
+                     "createdAt":  "2026-05-07T16:27:22.915Z",
+                     "updatedAt":  "2026-05-07T16:30:14.330Z",
+                     "title":  "Kit de bolsas ecolÃ³gicas",
+                     "description":  "4 bolsas ecolÃ³gicas para el sÃºper de diferentes colores: negro, rosa, azul y verde.",
+                     "stock":  5,
+                     "price":  250,
+                     "category":  {
+                                      "createdAt":  "2026-05-07T16:08:24.172Z",
+                                      "updatedAt":  "2026-05-07T16:08:24.172Z",
+                                      "title":  "Accesorios",
+                                      "id":  "69fcb8f8ed1b817612b9088d"
+                                  },
+                     "images":  [
+                                    {
+                                        "image":  {
+                                                      "createdAt":  "2026-05-07T16:27:01.871Z",
+                                                      "updatedAt":  "2026-05-07T16:27:01.872Z",
+                                                      "alt":  "bolsas",
+                                                      "url":  "/api/media/file/kit_bolsas_ecologicas_lpap.webp",
+                                                      "filename":  "kit_bolsas_ecologicas_lpap.webp",
+                                                      "mimeType":  "image/webp",
+                                                      "filesize":  25118,
+                                                      "width":  900,
+                                                      "height":  900,
+                                                      "focalX":  50,
+                                                      "focalY":  50,
+                                                      "id":  "69fcbd55ed1b817612b90a47",
+                                                      "thumbnailURL":  null
+                                                  },
+                                        "id":  "69fcbcff8bddc7dd7a1d2301"
+                                    }
+                                ],
+                     "variants":  [
+
+                                  ],
+                     "meta":  {
+                                  "title":  "Kit de bolsas ecolÃ³gicas",
+                                  "description":  "4 bolsas ecolÃ³gicas para el sÃºper de diferentes colores: negro, rosa, azul y verde.",
+                                  "image":  {
+                                                "createdAt":  "2026-05-07T16:27:01.871Z",
+                                                "updatedAt":  "2026-05-07T16:27:01.872Z",
+                                                "alt":  "bolsas",
+                                                "url":  "/api/media/file/kit_bolsas_ecologicas_lpap.webp",
+                                                "filename":  "kit_bolsas_ecologicas_lpap.webp",
+                                                "mimeType":  "image/webp",
+                                                "filesize":  25118,
+                                                "width":  900,
+                                                "height":  900,
+                                                "focalX":  50,
+                                                "focalY":  50,
+                                                "id":  "69fcbd55ed1b817612b90a47",
+                                                "thumbnailURL":  null
+                                            }
+                              },
+                     "id":  "69fcbd6aed1b817612b90a69",
+                     "featured":  false
+                 },
+                 {
+                     "createdAt":  "2026-05-07T16:21:28.388Z",
+                     "updatedAt":  "2026-05-07T16:21:28.389Z",
+                     "title":  "BotÃ³n LPAP",
+                     "description":  "En la compra de este botÃ³n estas apoyando a los niÃ±os con cÃ¡ncer.",
+                     "stock":  10,
+                     "price":  30,
+                     "category":  {
+                                      "createdAt":  "2026-05-07T16:08:24.172Z",
+                                      "updatedAt":  "2026-05-07T16:08:24.172Z",
+                                      "title":  "Accesorios",
+                                      "id":  "69fcb8f8ed1b817612b9088d"
+                                  },
+                     "images":  [
+                                    {
+                                        "image":  {
+                                                      "createdAt":  "2026-05-07T16:20:46.987Z",
+                                                      "updatedAt":  "2026-05-07T16:20:46.987Z",
+                                                      "alt":  "Boton",
+                                                      "url":  "/api/media/file/Boton.webp",
+                                                      "filename":  "Boton.webp",
+                                                      "mimeType":  "image/webp",
+                                                      "filesize":  13210,
+                                                      "width":  900,
+                                                      "height":  760,
+                                                      "focalX":  50,
+                                                      "focalY":  50,
+                                                      "id":  "69fcbbdeed1b817612b909ec",
+                                                      "thumbnailURL":  null
+                                                  },
+                                        "id":  "69fcbbce8bddc7dd7a1d22ff"
+                                    }
+                                ],
+                     "variants":  [
+
+                                  ],
+                     "meta":  {
+                                  "title":  "BotÃ³n LPAP",
+                                  "description":  "En la compra de este botÃ³n estas apoyando a los niÃ±os con cÃ¡ncer.",
+                                  "image":  {
+                                                "createdAt":  "2026-05-07T16:20:46.987Z",
+                                                "updatedAt":  "2026-05-07T16:20:46.987Z",
+                                                "alt":  "Boton",
+                                                "url":  "/api/media/file/Boton.webp",
+                                                "filename":  "Boton.webp",
+                                                "mimeType":  "image/webp",
+                                                "filesize":  13210,
+                                                "width":  900,
+                                                "height":  760,
+                                                "focalX":  50,
+                                                "focalY":  50,
+                                                "id":  "69fcbbdeed1b817612b909ec",
+                                                "thumbnailURL":  null
+                                            }
+                              },
+                     "id":  "69fcbc08ed1b817612b90a0d",
+                     "featured":  false
+                 },
+                 {
+                     "createdAt":  "2026-05-07T16:13:09.154Z",
+                     "updatedAt":  "2026-05-15T15:24:29.665Z",
+                     "title":  "BolÃ­grafo LPAP",
+                     "description":  "Pluma de tinta negra con lazo representativo de la lucha contra la leucemia.",
+                     "category":  {
+                                      "createdAt":  "2026-05-07T16:08:24.172Z",
+                                      "updatedAt":  "2026-05-07T16:08:24.172Z",
+                                      "title":  "Accesorios",
+                                      "id":  "69fcb8f8ed1b817612b9088d"
+                                  },
+                     "images":  [
+                                    {
+                                        "image":  {
+                                                      "createdAt":  "2026-05-07T16:12:32.541Z",
+                                                      "updatedAt":  "2026-05-07T16:12:32.541Z",
+                                                      "alt":  "Boligrafo",
+                                                      "url":  "/api/media/file/boligrafo-1.webp",
+                                                      "filename":  "boligrafo-1.webp",
+                                                      "mimeType":  "image/webp",
+                                                      "filesize":  7294,
+                                                      "width":  900,
+                                                      "height":  600,
+                                                      "focalX":  50,
+                                                      "focalY":  50,
+                                                      "id":  "69fcb9f0ed1b817612b908f6",
+                                                      "thumbnailURL":  null
+                                                  },
+                                        "id":  "69fcb9c28bddc7dd7a1d22fd"
+                                    }
+                                ],
+                     "variants":  [
+
+                                  ],
+                     "meta":  {
+                                  "title":  "Boligrafo",
+                                  "description":  "Pluma de tinta negra con lazo representativo de la lucha contra la leucemia.",
+                                  "image":  {
+                                                "createdAt":  "2026-05-07T16:12:32.541Z",
+                                                "updatedAt":  "2026-05-07T16:12:32.541Z",
+                                                "alt":  "Boligrafo",
+                                                "url":  "/api/media/file/boligrafo-1.webp",
+                                                "filename":  "boligrafo-1.webp",
+                                                "mimeType":  "image/webp",
+                                                "filesize":  7294,
+                                                "width":  900,
+                                                "height":  600,
+                                                "focalX":  50,
+                                                "focalY":  50,
+                                                "id":  "69fcb9f0ed1b817612b908f6",
+                                                "thumbnailURL":  null
+                                            }
+                              },
+                     "price":  30,
+                     "stock":  10,
+                     "featured":  true,
+                     "slug":  "bolgrafo-lpap",
+                     "id":  "69fcba15ed1b817612b90919"
+                 }
+             ],
+    "totalDocs":  6,
+    "limit":  10,
+    "totalPages":  1,
+    "page":  1,
+    "pagingCounter":  1,
+    "hasPrevPage":  false,
+    "hasNextPage":  false,
+    "prevPage":  null,
+    "nextPage":  null
+}

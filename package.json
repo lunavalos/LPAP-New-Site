@@ -1,0 +1,22 @@
+{
+  "name": "lpap",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "pnpm --filter admin dev",
+    "store": "pnpm --filter store dev",
+    "build": "pnpm --filter admin build",
+    "start": "pnpm --filter admin start",
+    "lint": "pnpm --recursive lint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "sharp",
+      "esbuild"
+    ]
+  }
+}

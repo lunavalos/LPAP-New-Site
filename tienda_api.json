@@ -1,0 +1,33 @@
+﻿{
+    "docs":  [
+                 {
+                     "createdAt":  "2026-05-14T19:36:59.117Z",
+                     "updatedAt":  "2026-05-15T15:23:43.260Z",
+                     "title":  "Tienda con causa",
+                     "slug":  "tienda",
+                     "layout":  [
+                                    {
+                                        "blockType":  "product-grid",
+                                        "title":  "Productos",
+                                        "limit":  12,
+                                        "sort":  "-createdAt",
+                                        "featuredOnly":  false,
+                                        "id":  "6a073a60f2405599f384b6c4"
+                                    }
+                                ],
+                     "meta":  {
+
+                              },
+                     "id":  "6a06245b8af98cfc78bbe633"
+                 }
+             ],
+    "totalDocs":  1,
+    "limit":  10,
+    "totalPages":  1,
+    "page":  1,
+    "pagingCounter":  1,
+    "hasPrevPage":  false,
+    "hasNextPage":  false,
+    "prevPage":  null,
+    "nextPage":  null
+}
