@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useCart } from '@/context/CartContext'
 import styles from './Checkout.module.css'
 
@@ -8,14 +8,25 @@ const PAYLOAD_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:300
 
 export default function OrderSummary() {
   const { items, totalPrice } = useCart()
+  const [shipping, setShipping] = useState(180)
+
+  useEffect(() => {
+    fetch(`${PAYLOAD_URL}/api/globals/store-settings`)
+      .then(res => res.json())
+      .then(data => {
+        if (data && typeof data.shippingPrice === 'number') {
+          setShipping(data.shippingPrice)
+        }
+      })
+      .catch(err => console.error('Error fetching shipping price:', err))
+  }, [])
 
   const format = (val: number) => new Intl.NumberFormat('es-MX', {
     style: 'currency',
     currency: 'MXN',
   }).format(val)
 
-  const taxes = totalPrice * 0.16
-  const grandTotal = totalPrice + taxes
+  const grandTotal = totalPrice + shipping
 
   return (
     <div className={styles.summaryCard}>
@@ -48,11 +59,7 @@ export default function OrderSummary() {
         </div>
         <div className={styles.totalRow}>
           <span>Envío</span>
-          <span className={styles.free}>Gratis</span>
-        </div>
-        <div className={styles.totalRow}>
-          <span>IVA (16%)</span>
-          <span>{format(taxes)}</span>
+          <span>{format(shipping)}</span>
         </div>
         <div className={`${styles.totalRow} ${styles.grandTotal}`}>
           <span>Total</span>

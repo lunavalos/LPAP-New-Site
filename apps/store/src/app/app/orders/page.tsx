@@ -11,6 +11,7 @@ export default function OrdersPage() {
   const { user, getAuthHeaders } = useAuth()
   const [orders, setOrders] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
+  const [expandedOrderId, setExpandedOrderId] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -66,6 +67,7 @@ export default function OrdersPage() {
         <div className={styles.ordersList}>
           {orders.map((order) => {
             const status = getStatusLabel(order.status)
+            const isExpanded = expandedOrderId === order.id
             return (
               <div key={order.id} className={styles.orderCard}>
                 <div className={styles.orderHeader}>
@@ -89,13 +91,58 @@ export default function OrdersPage() {
                   ))}
                 </div>
 
+                {isExpanded && (
+                  <div className={styles.orderDetailsExpanded}>
+                    <div className={styles.detailsGrid}>
+                      <div className={styles.detailsCol}>
+                        <h4>Dirección de Envío</h4>
+                        <p>{order.shippingAddress.street}</p>
+                        <p>{order.shippingAddress.city}, {order.shippingAddress.state} {order.shippingAddress.zipCode}</p>
+                        <p>{order.shippingAddress.country}</p>
+                        {order.shippingAddress.specifications && (
+                          <p className={styles.specsText}><strong>Ref:</strong> {order.shippingAddress.specifications}</p>
+                        )}
+                      </div>
+                      <div className={styles.detailsCol}>
+                        <h4>Resumen de Pago</h4>
+                        <div className={styles.detailsPriceRow}>
+                          <span>Subtotal:</span>
+                          <span>{formatPrice(order.subtotal)}</span>
+                        </div>
+                        <div className={styles.detailsPriceRow}>
+                          <span>Envío:</span>
+                          <span>{formatPrice(order.shipping || 0)}</span>
+                        </div>
+                        <div className={styles.detailsPriceRow}>
+                          <span>Impuestos (0%):</span>
+                          <span>{formatPrice(order.taxes || 0)}</span>
+                        </div>
+                        <div className={`${styles.detailsPriceRow} ${styles.detailsTotalRow}`}>
+                          <span>Total:</span>
+                          <span>{formatPrice(order.total)}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 <div className={styles.orderFooter}>
                   <div className={styles.orderTotal}>
                     <span>Total</span>
                     <strong>{formatPrice(order.total)}</strong>
                   </div>
-                  <button className={styles.detailLink}>
-                    Detalles <ChevronRight size={16} />
+                  <button 
+                    className={styles.detailLink}
+                    onClick={() => setExpandedOrderId(isExpanded ? null : order.id)}
+                  >
+                    {isExpanded ? 'Ocultar' : 'Detalles'}{' '}
+                    <ChevronRight 
+                      size={16} 
+                      style={{ 
+                        transform: isExpanded ? 'rotate(90deg)' : 'none',
+                        transition: 'transform 0.2s' 
+                      }} 
+                    />
                   </button>
                 </div>
               </div>

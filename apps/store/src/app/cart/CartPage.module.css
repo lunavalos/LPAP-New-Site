@@ -37,3 +37,10 @@
   font-size: 14px;
   line-height: 1.6;
 }
+
+.sidebar {
+  position: sticky;
+  top: 120px;
+  display: flex;
+  flex-direction: column;
+}

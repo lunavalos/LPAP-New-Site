@@ -24,7 +24,7 @@ const Nav: React.FC = () => {
 
   const navItems = [
     {
-      label: 'Actividades',
+      label: 'Colecciones',
       href: '/admin',
       icon: <LayoutDashboard size={20} />,
     },
@@ -59,6 +59,11 @@ const Nav: React.FC = () => {
       icon: <ShoppingCart size={20} />,
     },
     {
+      label: 'Configuración de Tienda',
+      href: '/admin/globals/store-settings',
+      icon: <Package size={20} />,
+    },
+    {
       label: 'Páginas',
       href: '/admin/collections/pages',
       icon: <FileText size={20} />,
@@ -74,11 +79,6 @@ const Nav: React.FC = () => {
     {
       label: 'Navegación',
       href: '/admin/globals/header',
-      icon: <FileText size={20} />,
-    },
-    {
-      label: 'Pie de Página',
-      href: '/admin/globals/footer',
       icon: <FileText size={20} />,
     },
   ]

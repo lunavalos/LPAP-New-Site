@@ -1,15 +1,27 @@
-'use client'
-
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { X, ShoppingBag, ArrowRight } from 'lucide-react'
 import { useCart } from '@/context/CartContext'
 import CartItem from './CartItem'
 import Link from 'next/link'
 import styles from './Cart.module.css'
 
+const PAYLOAD_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:3000'
+
 export default function CartDrawer() {
   const { isCartOpen, closeCart, items, totalPrice, totalItems } = useCart()
   const drawerRef = useRef<HTMLDivElement>(null)
+  const [shipping, setShipping] = useState(180)
+
+  useEffect(() => {
+    fetch(`${PAYLOAD_URL}/api/globals/store-settings`)
+      .then(res => res.json())
+      .then(data => {
+        if (data && typeof data.shippingPrice === 'number') {
+          setShipping(data.shippingPrice)
+        }
+      })
+      .catch(err => console.error('Error fetching shipping price:', err))
+  }, [])
 
   // Close on Escape
   useEffect(() => {
@@ -62,7 +74,9 @@ export default function CartDrawer() {
               <span>Subtotal</span>
               <span>{new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(totalPrice)}</span>
             </div>
-            <p className={styles.footerNote}>Envío e impuestos calculados en el checkout.</p>
+            <p className={styles.footerNote}>
+              Envío de {new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(shipping)} M.N. calculado en el checkout.
+            </p>
             
             <div className={styles.drawerActions}>
               <Link href="/cart" onClick={closeCart} className={styles.viewCartBtn}>

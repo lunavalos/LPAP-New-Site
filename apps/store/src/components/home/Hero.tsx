@@ -48,8 +48,8 @@ export default function Hero() {
         <span className={styles.tagline}>Lucha Por Ángeles Pequeños A.C.</span>
 
         <h1 className={styles.title}>
-          Uniendo corazones para{' '}
-          <span className={styles.accentWord}>salvar vidas</span>
+          LPAP transforma apoyo{' '}
+          <span className={styles.accentWord}>en esperanza</span>
         </h1>
 
         <p className={styles.subtitle}>

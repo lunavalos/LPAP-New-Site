@@ -58,7 +58,7 @@ export default function Programs() {
         <div className={styles.header}>
           <span className={styles.tag}>Programas de Apoyo</span>
           <h2 className={styles.headerTitle}>
-            Cómo transformamos el camino juntos
+            Cómo LPAP transforma el camino juntos
           </h2>
           <p className={styles.headerSub}>
             Implementamos un sistema de soporte integral que cubre las necesidades médicas, nutricionales, emocionales y recreativas de los guerreros y sus familias.

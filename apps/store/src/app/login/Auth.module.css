@@ -15,6 +15,18 @@
   max-width: 480px;
   width: 100%;
   border: 1px solid #f0f0f0;
+  position: relative;
+  overflow: hidden;
+}
+
+.authCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--accent, #DC5DA3) 0%, var(--primary, #f4852b) 100%);
 }
 
 .title {

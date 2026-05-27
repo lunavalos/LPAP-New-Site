@@ -10,7 +10,8 @@ import styles from './Blocks.module.css'
 
 interface BlocksProps {
   layout: any[]
-  products?: any[]  // pasados desde el servidor para el bloque archive
+  products?: any[]       // para el bloque archive (carousel)
+  serverProducts?: any[] // pre-fetched desde el servidor para product-grid
 }
 
 const PAYLOAD_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:3000'
@@ -75,41 +76,73 @@ function ArchiveBlock({ block, products }: { block: any; products: any[] }) {
 }
 
 // ─── Product Grid Block ──────────────────────────────────────────────────────
-function ProductGridBlock({ block }: { block: any }) {
-  const [products, setProducts] = React.useState<any[]>([])
-  const [loading, setLoading] = React.useState(true)
+function ProductGridSkeleton() {
+  return (
+    <section style={{ padding: '100px 0', background: '#fff' }}>
+      <div className={styles.container}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(330px, 1fr))',
+          gap: '56px 40px'
+        }}>
+          {[1,2,3,4,5,6].map(i => (
+            <div key={i} style={{ borderRadius: 20, overflow: 'hidden' }}>
+              <div style={{
+                width: '100%', height: 280, background: 'linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%)',
+                backgroundSize: '200% 100%',
+                animation: 'shimmer 1.5s infinite',
+                borderRadius: 20,
+              }} />
+              <div style={{ padding: '20px 4px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <div style={{ height: 16, width: '60%', borderRadius: 8, background: 'linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+                <div style={{ height: 14, width: '40%', borderRadius: 8, background: 'linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite' }} />
+                <div style={{ height: 20, width: '30%', borderRadius: 8, background: 'linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%)', backgroundSize: '200% 100%', animation: 'shimmer 1.5s infinite', marginTop: 4 }} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <style>{`@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }`}</style>
+    </section>
+  )
+}
+
+function ProductGridBlock({ block, serverProducts }: { block: any; serverProducts?: any[] }) {
+  // Si ya vienen productos del servidor, usarlos directamente sin fetch
+  const [products, setProducts] = React.useState<any[]>(serverProducts || [])
+  const [loading, setLoading] = React.useState(!serverProducts?.length)
 
   React.useEffect(() => {
-    const fetchProducts = async () => {
-      setLoading(true)
-      try {
-        const queryParams = new URLSearchParams()
-        if (block.limit) queryParams.append('limit', block.limit.toString())
-        if (block.sort) queryParams.append('sort', block.sort)
-        if (block.featuredOnly) queryParams.append('where[featured][equals]', 'true')
-        
-        if (block.categories?.length) {
-          block.categories.forEach((cat: any) => {
-            const catId = typeof cat === 'object' ? cat.id : cat
-            queryParams.append('where[category][in][]', catId)
-          })
-        }
+    // Solo hacer fetch si no hay productos pre-cargados del servidor
+    if (serverProducts && serverProducts.length > 0) return
 
-        console.log('[ProductGrid] Fetching with params:', queryParams.toString())
-        const res = await fetch(`${PAYLOAD_URL}/api/products?depth=1&${queryParams.toString()}`)
-        const data = await res.json()
-        console.log('[ProductGrid] Received data:', data)
-        setProducts(data.docs || [])
-      } catch (err) {
-        console.error('[ProductGrid] Failed to fetch products:', err)
-      } finally {
-        setLoading(false)
-      }
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 8000)
+
+    const params = new URLSearchParams()
+    if (block.limit) params.append('limit', block.limit.toString())
+    if (block.sort) params.append('sort', block.sort)
+    if (block.featuredOnly) params.append('where[featured][equals]', 'true')
+    if (block.categories?.length) {
+      block.categories.forEach((cat: any) => {
+        const catId = typeof cat === 'object' ? cat.id : cat
+        params.append('where[category][in][]', catId)
+      })
     }
-    fetchProducts()
-  }, [block])
 
-  if (loading) return <div style={{ padding: '40px', textAlign: 'center' }}>Cargando productos...</div>
+    const url = `${PAYLOAD_URL}/api/products?depth=1&${params.toString()}`
+
+    fetch(url, { signal: controller.signal })
+      .then(res => res.json())
+      .then(data => setProducts(data.docs || []))
+      .catch(err => { if (err.name !== 'AbortError') console.error('[ProductGrid]', err) })
+      .finally(() => { clearTimeout(timeout); setLoading(false) })
+
+    return () => { controller.abort(); clearTimeout(timeout) }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  if (loading) return <ProductGridSkeleton />
 
   return (
     <section style={{ padding: '100px 0', background: '#fff' }}>
@@ -119,26 +152,32 @@ function ProductGridBlock({ block }: { block: any }) {
             <h2 className={styles.sectionTitle}>{block.title}</h2>
           </div>
         )}
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fill, minmax(330px, 1fr))', 
-          gap: '56px 40px' 
-        }}>
-          {products.map((p: any, i: number) => {
-            const rawUrl = p.images?.[0]?.image?.url
-            return (
-              <ProductCard
-                key={i}
-                title={p.title}
-                price={p.price || 0}
-                slug={p.slug}
-                imageUrl={rawUrl ? resolveUrl(rawUrl) : null}
-                description={p.description || p.excerpt}
-                category={p.category?.title}
-              />
-            )
-          })}
-        </div>
+        {products.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '60px 0', color: '#aaa', fontSize: 16 }}>
+            No hay productos disponibles en este momento.
+          </div>
+        ) : (
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(330px, 1fr))',
+            gap: '56px 40px'
+          }}>
+            {products.map((p: any, i: number) => {
+              const rawUrl = p.images?.[0]?.image?.url
+              return (
+                <ProductCard
+                  key={i}
+                  title={p.title}
+                  price={p.price || 0}
+                  slug={p.slug}
+                  imageUrl={rawUrl ? resolveUrl(rawUrl) : null}
+                  description={p.description || p.excerpt}
+                  category={p.category?.title}
+                />
+              )
+            })}
+          </div>
+        )}
       </div>
     </section>
   )
@@ -266,7 +305,7 @@ function FaqBlock({ block }: { block: any }) {
 }
 
 // ─── Main Blocks renderer ─────────────────────────────────────────────────────
-export default function Blocks({ layout, products = [] }: BlocksProps) {
+export default function Blocks({ layout, products = [], serverProducts = [] }: BlocksProps) {
   console.log('[Blocks] layout data:', layout)
   
   if (!layout || layout.length === 0) {
@@ -552,7 +591,7 @@ export default function Blocks({ layout, products = [] }: BlocksProps) {
 
           // ── Product Grid ──────────────────────────────────────────────────
           case 'product-grid':
-            return <ProductGridBlock key={index} block={block} />
+            return <ProductGridBlock key={index} block={block} serverProducts={serverProducts} />
 
           // ── Fallback ──────────────────────────────────────────────────────
           default:

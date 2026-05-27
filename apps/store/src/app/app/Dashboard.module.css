@@ -310,6 +310,18 @@
   border-radius: 24px;
   border: 1px solid #f0f0f0;
   padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.profileCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--accent, #DC5DA3) 0%, var(--primary, #f4852b) 100%);
 }
 
 .formSection {
@@ -471,6 +483,18 @@
   padding: 32px;
   border-radius: 24px;
   border: 1px solid #f0f0f0;
+  position: relative;
+  overflow: hidden;
+}
+
+.addressFormCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--accent, #DC5DA3) 0%, var(--primary, #f4852b) 100%);
 }
 
 .formRow {
@@ -500,4 +524,90 @@
   font-size: 14px;
   font-weight: 700;
   color: #666;
+}
+
+/* Expanded Orders Details */
+.orderDetailsExpanded {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #f8f8f8;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.detailsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 576px) {
+  .detailsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.detailsCol h4 {
+  font-size: 14px;
+  font-weight: 800;
+  color: #111;
+  margin-bottom: 12px;
+}
+
+.detailsCol p {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.specsText {
+  margin-top: 8px;
+  font-style: italic;
+  color: #888;
+}
+
+.detailsPriceRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.detailsTotalRow {
+  font-weight: 800;
+  color: #f4852b;
+  font-size: 14px;
+  border-top: 1px dashed #eee;
+  padding-top: 8px;
+  margin-top: 8px;
+}
+
+/* Address Card Actions */
+.addrActionsFooter {
+  margin-top: 16px;
+  border-top: 1px solid #f9fafb;
+  padding-top: 12px;
+}
+
+.setDefaultBtn {
+  background: none;
+  border: 1px solid #e0e0e0;
+  color: #666;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.setDefaultBtn:hover {
+  background: #f4852b;
+  color: #fff;
+  border-color: #f4852b;
 }

@@ -56,6 +56,27 @@ export default function AddressesPage() {
     }
   }
 
+  const handleSetDefault = async (index: number) => {
+    try {
+      const updatedAddresses = user?.addresses?.map((addr: any, i: number) => ({
+        ...addr,
+        isDefault: i === index,
+      }))
+      
+      const res = await fetch(`${PAYLOAD_URL}/api/customers/${user?.id}`, {
+        method: 'PATCH',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ addresses: updatedAddresses }),
+      })
+
+      if (!res.ok) throw new Error('Error al establecer dirección principal')
+
+      await refreshUser()
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
   const handleDelete = async (index: number) => {
     if (!confirm('¿Seguro que quieres eliminar esta dirección?')) return
     
@@ -164,6 +185,13 @@ export default function AddressesPage() {
                     <p className={styles.addrSpecs}>Ref: {addr.specifications}</p>
                   )}
                 </div>
+                {!addr.isDefault && (
+                  <div className={styles.addrActionsFooter}>
+                    <button onClick={() => handleSetDefault(i)} className={styles.setDefaultBtn}>
+                      Establecer como principal
+                    </button>
+                  </div>
+                )}
               </div>
             ))
           ) : (

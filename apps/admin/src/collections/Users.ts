@@ -14,7 +14,15 @@ export const Users: CollectionConfig = {
       }
     },
     create: ({ req: { user } }) => Boolean(user && 'role' in user && user.role === 'admin'),
-    update: ({ req: { user } }) => Boolean(user && 'role' in user && user.role === 'admin'),
+    update: ({ req: { user } }) => {
+      if (user && 'role' in user && user.role === 'admin') return true
+      if (user && 'role' in user && user.role === 'editor') {
+        return {
+          id: { equals: user.id },
+        }
+      }
+      return false
+    },
     delete: ({ req: { user } }) => Boolean(user && 'role' in user && user.role === 'admin'),
   },
   fields: [
@@ -23,10 +31,14 @@ export const Users: CollectionConfig = {
       type: 'select',
       options: [
         { label: 'Admin', value: 'admin' },
+        { label: 'Editor', value: 'editor' },
       ],
       defaultValue: 'admin',
       required: true,
       saveToJWT: true,
+      access: {
+        update: ({ req: { user } }) => Boolean(user && 'role' in user && user.role === 'admin'),
+      },
     },
   ],
 }

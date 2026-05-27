@@ -106,7 +106,7 @@ export default function SupportForm({ title, description }: SupportFormProps) {
                     required
                     value={formData.pacienteNombre}
                     onChange={handleInputChange}
-                    placeholder="Ej. Juan Pérez López"
+                    placeholder="Nombre completo"
                     className={styles.input}
                   />
                 </div>

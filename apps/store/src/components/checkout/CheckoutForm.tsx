@@ -1,19 +1,25 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { useCart } from '@/context/CartContext'
 import { useAuth } from '@/context/AuthContext'
 import styles from './Checkout.module.css'
+import StripePaymentSection from './StripePaymentSection'
 
 const PAYLOAD_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:3000'
 
-export default function CheckoutForm() {
+interface Props {
+  shipping: number
+}
+
+export default function CheckoutForm({ shipping }: Props) {
   const router = useRouter()
   const { items, totalPrice, clearCart } = useCart()
   const { user, getAuthHeaders } = useAuth()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const formRef = useRef<HTMLFormElement>(null)
 
   const [formData, setFormData] = useState({
     name: '',
@@ -36,8 +42,7 @@ export default function CheckoutForm() {
         email: user.email || prev.email,
         phone: user.phone || prev.phone,
       }))
-      
-      // If user has a default address, pre-fill it too
+
       const defaultAddr = user.addresses?.find((a: any) => a.isDefault) || user.addresses?.[0]
       if (defaultAddr) {
         setFormData(prev => ({
@@ -56,53 +61,76 @@ export default function CheckoutForm() {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
+  const createOrder = async (paymentIntentId: string) => {
+    const orderData = {
+      customer: {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+      },
+      shippingAddress: {
+        street: formData.street,
+        city: formData.city,
+        state: formData.state,
+        zipCode: formData.zipCode,
+        country: formData.country,
+        specifications: formData.specifications,
+      },
+      items: items.map(item => ({
+        product: item.id,
+        title: item.title,
+        slug: item.slug,
+        imageUrl: item.imageUrl,
+        variantName: item.variant?.name,
+        price: item.price,
+        quantity: item.quantity,
+      })),
+      subtotal: totalPrice,
+      shipping: shipping,
+      taxes: 0,
+      total: totalPrice + shipping,
+      status: 'paid',
+      account: user?.id || null,
+      stripe: {
+        paymentIntentId,
+        paymentStatus: 'succeeded',
+      },
+    }
+
+    const res = await fetch(`${PAYLOAD_URL}/api/orders`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(orderData),
+    })
+
+    if (!res.ok) throw new Error('Error al registrar el pedido')
+    return res.json()
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
     setError(null)
 
     try {
-      const orderData = {
-        customer: {
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-        },
-        shippingAddress: {
-          street: formData.street,
-          city: formData.city,
-          state: formData.state,
-          zipCode: formData.zipCode,
-          country: formData.country,
-          specifications: formData.specifications,
-        },
-        items: items.map(item => ({
-          product: item.id,
-          title: item.title,
-          slug: item.slug,
-          imageUrl: item.imageUrl,
-          variantName: item.variant?.name,
-          price: item.price,
-          quantity: item.quantity,
-        })),
-        subtotal: totalPrice,
-        taxes: totalPrice * 0.16,
-        total: totalPrice * 1.16,
-        status: 'pending',
-        account: user?.id || null, // Associate with customer account if logged in
+      const key = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ''
+      const stripeReady = key.startsWith('pk_') && !key.includes('REEMPLAZA') && key.length > 30
+      const confirm = (formRef.current as any)?.__stripeConfirm
+
+      let paymentIntentId: string | null = null
+
+      if (stripeReady && confirm) {
+        // Confirmar pago con Stripe
+        paymentIntentId = await confirm()
+        if (!paymentIntentId) {
+          // Error ya reportado por StripePaymentSection
+          setLoading(false)
+          return
+        }
       }
 
-      const res = await fetch(`${PAYLOAD_URL}/api/orders`, {
-        method: 'POST',
-        headers: getAuthHeaders(),
-        body: JSON.stringify(orderData),
-      })
-
-      if (!res.ok) throw new Error('Error al crear el pedido')
-
-      const result = await res.json()
-      
-      // Clear cart and redirect
+      // Crear la orden en Payload
+      const result = await createOrder(paymentIntentId || '')
       clearCart()
       router.push(`/checkout/success?orderId=${result.doc.id}`)
     } catch (err: any) {
@@ -113,27 +141,73 @@ export default function CheckoutForm() {
   }
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit} ref={formRef}>
+      {/* ── Información de Contacto ── */}
       <div className={styles.section}>
-        <h3 className={styles.sectionTitle}>Información de contacto</h3>
+        <h3 className={styles.sectionTitle}>
+          Información de contacto
+        </h3>
         <div className={styles.grid}>
           <div className={styles.field}>
             <label>Nombre completo</label>
-            <input name="name" required value={formData.name} onChange={handleChange} placeholder="Ej. Juan Pérez" />
+            <input name="name" required value={formData.name} onChange={handleChange} placeholder="Nombre completo" />
           </div>
           <div className={styles.field}>
             <label>Email</label>
-            <input name="email" type="email" required value={formData.email} onChange={handleChange} placeholder="juan@ejemplo.com" />
+            <input name="email" type="email" required value={formData.email} onChange={handleChange} placeholder="correo@ejemplo.com" />
           </div>
           <div className={styles.field}>
             <label>Teléfono</label>
-            <input name="phone" type="tel" value={formData.phone} onChange={handleChange} placeholder="55 1234 5678" />
+            <input name="phone" type="tel" value={formData.phone} onChange={handleChange} placeholder="+52 55 0000 0000" />
           </div>
         </div>
       </div>
 
+      {/* ── Dirección de Envío ── */}
       <div className={styles.section}>
-        <h3 className={styles.sectionTitle}>Dirección de envío</h3>
+        <h3 className={styles.sectionTitle}>
+          Dirección de envío
+        </h3>
+
+        {user?.addresses && user.addresses.length > 1 && (
+          <div className={`${styles.field} ${styles.full}`} style={{ marginBottom: '24px' }}>
+            <select
+              onChange={(e) => {
+                const idx = parseInt(e.target.value)
+                if (!isNaN(idx) && user.addresses?.[idx]) {
+                  const selectedAddr = user.addresses[idx]
+                  setFormData(prev => ({
+                    ...prev,
+                    street: selectedAddr.street || '',
+                    city: selectedAddr.city || '',
+                    state: selectedAddr.state || '',
+                    zipCode: selectedAddr.zipCode || '',
+                    specifications: selectedAddr.specifications || '',
+                  }))
+                }
+              }}
+              style={{
+                width: '100%',
+                padding: '12px 16px',
+                borderRadius: '12px',
+                border: '2px solid #f0f0f0',
+                fontSize: '14px',
+                outline: 'none',
+                background: '#fff',
+                fontWeight: '600',
+                color: '#333',
+              }}
+            >
+              <option value="">-- Elige una dirección guardada --</option>
+              {user.addresses.map((addr: any, idx: number) => (
+                <option key={idx} value={idx}>
+                  {addr.street}, {addr.city}, {addr.state} {addr.isDefault ? '(Principal)' : ''}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
         <div className={styles.grid}>
           <div className={`${styles.field} ${styles.full}`}>
             <label>Calle y número</label>
@@ -157,22 +231,42 @@ export default function CheckoutForm() {
           </div>
           <div className={`${styles.field} ${styles.full}`}>
             <label>Especificaciones / Referencias (Opcional)</label>
-            <textarea 
-              name="specifications" 
-              value={formData.specifications} 
-              onChange={handleChange} 
-              placeholder="Ej. Casa blanca con portón negro, entre calles X y Y..." 
+            <textarea
+              name="specifications"
+              value={formData.specifications}
+              onChange={handleChange}
+              placeholder="Ej. Casa blanca con portón negro, entre calles X y Y..."
               rows={3}
             />
           </div>
         </div>
       </div>
 
-      {error && <p className={styles.errorMessage}>{error}</p>}
+      {/* ── Stripe Payment ── */}
+      <StripePaymentSection
+        formRef={formRef}
+        onSuccess={() => {}}
+        onError={(msg) => setError(msg)}
+        isSubmitting={loading}
+        setIsSubmitting={setLoading}
+      />
+
+      {error && <p className={styles.errorMessage}>⚠️ {error}</p>}
 
       <button type="submit" className={styles.submitBtn} disabled={loading || items.length === 0}>
-        {loading ? 'Procesando...' : 'Finalizar Pedido'}
+        {loading ? (
+          <span className={styles.btnLoading}>
+            <span className={styles.btnSpinner} />
+            Procesando pago...
+          </span>
+        ) : (
+          `Pagar $${(totalPrice + shipping).toLocaleString('es-MX')} MXN`
+        )}
       </button>
+
+      <p className={styles.secureNote}>
+        🔒 Tu información está protegida con cifrado de extremo a extremo
+      </p>
     </form>
   )
 }

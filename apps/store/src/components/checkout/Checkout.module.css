@@ -31,6 +31,18 @@
   border-radius: 24px;
   border: 1px solid #f0f0f0;
   margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--accent, #DC5DA3) 0%, var(--primary, #f4852b) 100%);
 }
 
 .sectionTitle {
@@ -220,3 +232,174 @@
   font-weight: 900;
   color: #111;
 }
+
+/* ── Section icon ── */
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 24px;
+  color: #111;
+}
+
+.sectionIcon {
+  font-size: 20px;
+}
+
+/* ── Stripe security badge ── */
+.stripeNotice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #166534;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+
+.lockIcon {
+  font-size: 16px;
+}
+
+/* ── Stripe PaymentElement wrapper ── */
+.paymentElementWrap {
+  position: relative;
+  min-height: 80px;
+}
+
+.stripeLoader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 0;
+  color: #888;
+  font-size: 14px;
+}
+
+/* ── Spinners ── */
+.spinner,
+.btnSpinner {
+  display: inline-block;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  flex-shrink: 0;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid #f4852b;
+  border-top-color: transparent;
+}
+
+.btnSpinner {
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255,255,255,0.4);
+  border-top-color: #fff;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Submit button loading state ── */
+.btnLoading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* ── Security note ── */
+.secureNote {
+  text-align: center;
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 16px;
+}
+
+/* ── Mock / Preview card (vista previa sin Stripe real) ── */
+.previewCard {
+  background: #fafafa;
+  border: 1.5px dashed #e0e0e0;
+  border-radius: 16px;
+  padding: 24px;
+  position: relative;
+}
+
+.previewBadge {
+  display: inline-block;
+  background: #fff3e0;
+  color: #e65100;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #ffe0b2;
+}
+
+.mockInput {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border: 2px solid #ebebeb;
+  border-radius: 12px;
+  background: #fff;
+  min-height: 52px;
+}
+
+.mockValue {
+  font-size: 15px;
+  color: #ccc;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1px;
+}
+
+.cardBrands {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.paymentMethods {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #ebebeb;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.payMethodLabel {
+  font-size: 12px;
+  color: #aaa;
+  font-weight: 600;
+}
+
+.payMethodIcons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.payMethodChip {
+  font-size: 12px;
+  background: #f0f0f0;
+  padding: 4px 12px;
+  border-radius: 20px;
+  color: #666;
+  font-weight: 600;
+}
+

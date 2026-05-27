@@ -24,22 +24,22 @@ const SUGGESTIONS = [
   {
     amount: 150,
     label: 'Suplementos',
-    text: 'Apoya con 1 Suplemento Alimenticio de alta nutrición para el fortalecimiento físico de un guerrero.',
+    text: 'Ayuda a proporcionar suplementos alimenticios que fortalecen la nutrición durante el tratamiento.',
   },
   {
     amount: 500,
     label: 'Estudios',
-    text: 'Financia 1 Estudio de Laboratorio o Análisis Clínico completo de monitoreo de células sanguíneas.',
+    text: 'Contribuye a la realización de estudios y análisis necesarios para el seguimiento médico.',
   },
   {
     amount: 1500,
     label: 'Quimioterapia',
-    text: 'Cubre el costo de insumos médicos para 1 Sesión de Quimioterapia y tratamiento activo.',
+    text: 'Apoya la compra de insumos y materiales médicos utilizados durante el tratamiento activo.',
   },
   {
     amount: 5000,
     label: 'Acompañamiento',
-    text: 'Aporta para un Ciclo Integral de Apoyo en Ludotecas, asesoría nutricional y soporte psicológico familiar.',
+    text: 'Ayuda a brindar acompañamiento, medicamentos, traslados y atención integral a familias durante el proceso.',
   },
 ]
 

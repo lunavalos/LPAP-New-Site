@@ -251,7 +251,7 @@ export default async function ProgramasPage() {
           <div className={styles.sectionHeader}>
             <span className={styles.tag}>Programas de Apoyo</span>
             <h2 className={styles.sectionTitle}>
-              Cómo transformamos el{' '}
+              Cómo LPAP transforma el{' '}
               <span className={styles.sectionTitleAccent}>camino juntos</span>
             </h2>
             <p className={styles.sectionSub}>

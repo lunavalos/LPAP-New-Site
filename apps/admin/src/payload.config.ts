@@ -18,7 +18,7 @@ import { Customers } from './collections/Customers'
 // Globals
 import { SiteSettings } from './globals/SiteSettings'
 import { Header } from './globals/Header'
-import { Footer } from './globals/Footer'
+import { StoreSettings } from './globals/StoreSettings'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -70,7 +70,7 @@ export default buildConfig({
   globals: [
     SiteSettings,
     Header,
-    Footer,
+    StoreSettings,
   ],
   i18n: {
     fallbackLanguage: 'es',

@@ -10,10 +10,23 @@ const PAYLOAD_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:300
 export default function ProfilePage() {
   const { user, refreshUser, getAuthHeaders } = useAuth()
   const [formData, setFormData] = useState({
-    name: user?.name || '',
-    phone: user?.phone || '',
+    name: '',
+    email: '',
+    phone: '',
+    password: '',
   })
   const [loading, setLoading] = useState(false)
+
+  React.useEffect(() => {
+    if (user) {
+      setFormData(prev => ({
+        ...prev,
+        name: user.name || '',
+        email: user.email || '',
+        phone: user.phone || '',
+      }))
+    }
+  }, [user])
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -22,15 +35,33 @@ export default function ProfilePage() {
     setMessage(null)
 
     try {
+      const body: any = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+      }
+      
+      if (formData.password.trim() !== '') {
+        if (formData.password.length < 6) {
+          throw new Error('La contraseña debe tener al menos 6 caracteres')
+        }
+        body.password = formData.password
+      }
+
       const res = await fetch(`${PAYLOAD_URL}/api/customers/${user?.id}`, {
         method: 'PATCH',
         headers: getAuthHeaders(),
-        body: JSON.stringify(formData),
+        body: JSON.stringify(body),
       })
 
-      if (!res.ok) throw new Error('Error al actualizar el perfil')
+      if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.errors?.[0]?.message || 'Error al actualizar el perfil')
+      }
       
       await refreshUser()
+      // Clear password field after successful update
+      setFormData(prev => ({ ...prev, password: '' }))
       setMessage({ type: 'success', text: 'Perfil actualizado correctamente' })
     } catch (err: any) {
       setMessage({ type: 'error', text: err.message })
@@ -65,11 +96,12 @@ export default function ProfilePage() {
               <label><Mail size={14} /> Correo Electrónico</label>
               <input 
                 type="email" 
-                disabled 
-                value={user?.email} 
-                className={styles.disabledInput}
+                required 
+                value={formData.email} 
+                onChange={(e) => setFormData({...formData, email: e.target.value})}
+                placeholder="juan@ejemplo.com"
               />
-              <p className={styles.hint}>El correo no puede ser modificado por seguridad.</p>
+              <p className={styles.hint}>Nota: Si cambias tu correo, deberás usar el nuevo para iniciar sesión.</p>
             </div>
 
             <div className={styles.field}>
@@ -80,6 +112,17 @@ export default function ProfilePage() {
                 onChange={(e) => setFormData({...formData, phone: e.target.value})} 
                 placeholder="55 1234 5678"
               />
+            </div>
+
+            <div className={styles.field}>
+              <label><Save size={14} /> Nueva Contraseña</label>
+              <input 
+                type="password" 
+                value={formData.password} 
+                onChange={(e) => setFormData({...formData, password: e.target.value})} 
+                placeholder="Ingresa una nueva contraseña si deseas cambiarla"
+              />
+              <p className={styles.hint}>Mínimo 6 caracteres. Déjalo en blanco si no deseas cambiarla.</p>
             </div>
           </div>
 

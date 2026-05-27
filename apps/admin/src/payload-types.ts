@@ -101,12 +101,12 @@ export interface Config {
   globals: {
     'site-settings': SiteSetting;
     header: Header;
-    footer: Footer;
+    'store-settings': StoreSetting;
   };
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     header: HeaderSelect<false> | HeaderSelect<true>;
-    footer: FooterSelect<false> | FooterSelect<true>;
+    'store-settings': StoreSettingsSelect<false> | StoreSettingsSelect<true>;
   };
   locale: null;
   widgets: {
@@ -160,7 +160,7 @@ export interface CustomerAuthOperations {
  */
 export interface User {
   id: string;
-  role: 'admin';
+  role: 'admin' | 'editor';
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -313,6 +313,7 @@ export interface Order {
     id?: string | null;
   }[];
   subtotal: number;
+  shipping: number;
   taxes: number;
   total: number;
   status: 'pending' | 'paid' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
@@ -324,6 +325,9 @@ export interface Order {
     country: string;
     specifications?: string | null;
   };
+  /**
+   * Datos generados automáticamente al procesar el pago con Stripe.
+   */
   stripe?: {
     sessionId?: string | null;
     paymentIntentId?: string | null;
@@ -768,6 +772,7 @@ export interface OrdersSelect<T extends boolean = true> {
         id?: T;
       };
   subtotal?: T;
+  shipping?: T;
   taxes?: T;
   total?: T;
   status?: T;
@@ -1079,24 +1084,14 @@ export interface Header {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "footer".
+ * via the `definition` "store-settings".
  */
-export interface Footer {
+export interface StoreSetting {
   id: string;
-  copyright: string;
-  sections?:
-    | {
-        title: string;
-        links?:
-          | {
-              label: string;
-              url: string;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-      }[]
-    | null;
+  /**
+   * Costo de envío fijo aplicable a todos los pedidos de la tienda.
+   */
+  shippingPrice: number;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1149,23 +1144,10 @@ export interface HeaderSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "footer_select".
+ * via the `definition` "store-settings_select".
  */
-export interface FooterSelect<T extends boolean = true> {
-  copyright?: T;
-  sections?:
-    | T
-    | {
-        title?: T;
-        links?:
-          | T
-          | {
-              label?: T;
-              url?: T;
-              id?: T;
-            };
-        id?: T;
-      };
+export interface StoreSettingsSelect<T extends boolean = true> {
+  shippingPrice?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
