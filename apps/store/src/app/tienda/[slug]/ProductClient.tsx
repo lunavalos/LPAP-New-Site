@@ -12,6 +12,7 @@ export default function ProductClient({ product }: { product: any }) {
   const [selectedVariant, setSelectedVariant] = useState(product.variants?.[0] || null)
   const [quantity, setQuantity] = useState(1)
   const [added, setAdded] = useState(false)
+  const [activeImageIndex, setActiveImageIndex] = useState(0)
 
   const currentPrice = selectedVariant ? selectedVariant.price : product.price
   const formattedPrice = new Intl.NumberFormat('es-MX', {
@@ -56,9 +57,9 @@ export default function ProductClient({ product }: { product: any }) {
     setTimeout(() => setAdded(false), 2000)
   }
 
-  const firstImageUrl = product.images?.[0]?.image?.url
-  const mainImage = firstImageUrl 
-    ? (firstImageUrl.startsWith('http') ? firstImageUrl : `${PAYLOAD_URL}${firstImageUrl}`)
+  const activeImageUrl = product.images?.[activeImageIndex]?.image?.url || product.images?.[0]?.image?.url
+  const mainImage = activeImageUrl 
+    ? (activeImageUrl.startsWith('http') ? activeImageUrl : `${PAYLOAD_URL}${activeImageUrl}`)
     : null
 
   return (
@@ -90,7 +91,11 @@ export default function ProductClient({ product }: { product: any }) {
                   if (!url) return null
                   const src = url.startsWith('http') ? url : `${PAYLOAD_URL}${url}`
                   return (
-                    <div key={i} className={styles.thumb}>
+                    <div 
+                      key={i} 
+                      className={`${styles.thumb} ${activeImageIndex === i ? styles.thumbActive : ''}`}
+                      onClick={() => setActiveImageIndex(i)}
+                    >
                       <img src={src} alt="" />
                     </div>
                   )

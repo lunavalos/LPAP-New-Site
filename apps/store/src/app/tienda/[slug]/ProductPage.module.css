@@ -62,6 +62,13 @@
   overflow: hidden;
   cursor: pointer;
   border: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.thumbActive {
+  border-color: var(--primary);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(244, 133, 43, 0.2);
 }
 
 .thumb img {
@@ -133,9 +140,15 @@
   transition: all 0.2s ease;
 }
 
+.variantBtn:hover:not(.variantActive) {
+  border-color: var(--accent, #DC5DA3);
+  color: var(--accent, #DC5DA3);
+  background: rgba(220, 93, 163, 0.03);
+}
+
 .variantActive {
-  border-color: var(--primary);
-  background: var(--primary);
+  border-color: var(--accent, #DC5DA3);
+  background: var(--accent, #DC5DA3);
   color: #fff;
 }
 
