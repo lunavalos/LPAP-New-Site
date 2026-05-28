@@ -33,18 +33,42 @@
 
 .socials {
   display: flex;
-  gap: 16px;
+  gap: 12px;
+  margin-top: 16px;
 }
 
-.socialLink {
+.socialBubble {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
   color: #fff;
-  opacity: 0.8;
-  transition: opacity 0.2s, color 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.socialLink:hover {
-  opacity: 1;
-  color: var(--primary);
+.socialBubble:hover {
+  color: #fff !important;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.facebook:hover {
+  background-color: #1877F2;
+  border-color: #1877F2;
+}
+
+.instagram:hover {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+  border-color: transparent;
+}
+
+.whatsapp:hover {
+  background-color: #25D366;
+  border-color: #25D366;
 }
 
 .colTitle {

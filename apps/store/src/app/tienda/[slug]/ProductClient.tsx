@@ -37,8 +37,28 @@ export default function ProductClient({ product }: { product: any }) {
     setTimeout(() => setAdded(false), 2000)
   }
 
-  const mainImage = product.images?.[0]?.image?.url 
-    ? (product.images[0].image.url.startsWith('http') ? product.images[0].image.url : `${PAYLOAD_URL}${product.images[0].image.url}`)
+  const handleSelectVariantAndAdd = (v: any) => {
+    setSelectedVariant(v)
+    addItem({
+      id: product.id,
+      title: product.title,
+      price: v.price,
+      quantity: quantity,
+      slug: product.slug,
+      imageUrl: product.images?.[0]?.image?.url,
+      variant: {
+        name: v.name,
+        sku: v.sku,
+        price: v.price
+      }
+    })
+    setAdded(true)
+    setTimeout(() => setAdded(false), 2000)
+  }
+
+  const firstImageUrl = product.images?.[0]?.image?.url
+  const mainImage = firstImageUrl 
+    ? (firstImageUrl.startsWith('http') ? firstImageUrl : `${PAYLOAD_URL}${firstImageUrl}`)
     : null
 
   return (
@@ -65,11 +85,16 @@ export default function ProductClient({ product }: { product: any }) {
             </div>
             {product.images?.length > 1 && (
               <div className={styles.thumbnails}>
-                {product.images.map((img: any, i: number) => (
-                  <div key={i} className={styles.thumb}>
-                    <img src={img.image.url.startsWith('http') ? img.image.url : `${PAYLOAD_URL}${img.image.url}`} alt="" />
-                  </div>
-                ))}
+                {product.images.map((img: any, i: number) => {
+                  const url = img?.image?.url
+                  if (!url) return null
+                  const src = url.startsWith('http') ? url : `${PAYLOAD_URL}${url}`
+                  return (
+                    <div key={i} className={styles.thumb}>
+                      <img src={src} alt="" />
+                    </div>
+                  )
+                })}
               </div>
             )}
           </div>
@@ -92,8 +117,9 @@ export default function ProductClient({ product }: { product: any }) {
                   {product.variants.map((v: any, i: number) => (
                     <button 
                       key={i} 
-                      className={`${styles.variantBtn} ${selectedVariant?.sku === v.sku ? styles.variantActive : ''}`}
-                      onClick={() => setSelectedVariant(v)}
+                      type="button"
+                      className={`${styles.variantBtn} ${selectedVariant?.name === v.name ? styles.variantActive : ''}`}
+                      onClick={() => handleSelectVariantAndAdd(v)}
                     >
                       {v.name}
                     </button>

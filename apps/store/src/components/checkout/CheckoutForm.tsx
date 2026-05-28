@@ -245,7 +245,6 @@ export default function CheckoutForm({ shipping }: Props) {
       {/* ── Stripe Payment ── */}
       <StripePaymentSection
         formRef={formRef}
-        onSuccess={() => {}}
         onError={(msg) => setError(msg)}
         isSubmitting={loading}
         setIsSubmitting={setLoading}

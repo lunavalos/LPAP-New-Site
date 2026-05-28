@@ -44,7 +44,7 @@ export default function CartItem({ item, layout = 'drawer' }: CartItemProps) {
           <h4 className={styles.itemTitle}>{item.title}</h4>
           <button 
             className={styles.removeBtn} 
-            onClick={() => removeItem(item.id, item.variant?.sku)}
+            onClick={() => removeItem(item.id, item.variant?.name)}
             title="Eliminar"
           >
             <Trash2 size={16} />
@@ -57,11 +57,11 @@ export default function CartItem({ item, layout = 'drawer' }: CartItemProps) {
         
         <div className={styles.itemFooter}>
           <div className={styles.quantity}>
-            <button onClick={() => updateQuantity(item.id, item.quantity - 1, item.variant?.sku)}>
+            <button onClick={() => updateQuantity(item.id, item.quantity - 1, item.variant?.name)}>
               <Minus size={14} />
             </button>
             <span>{item.quantity}</span>
-            <button onClick={() => updateQuantity(item.id, item.quantity + 1, item.variant?.sku)}>
+            <button onClick={() => updateQuantity(item.id, item.quantity + 1, item.variant?.name)}>
               <Plus size={14} />
             </button>
           </div>

@@ -19,8 +19,8 @@ interface CartItem {
 interface CartContextType {
   items: CartItem[]
   addItem: (item: CartItem) => void
-  removeItem: (id: string, variantSku?: string) => void
-  updateQuantity: (id: string, quantity: number, variantSku?: string) => void
+  removeItem: (id: string, variantName?: string) => void
+  updateQuantity: (id: string, quantity: number, variantName?: string) => void
   clearCart: () => void
   totalItems: number
   totalPrice: number
@@ -63,10 +63,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const addItem = (newItem: CartItem) => {
     setItems((prev) => {
-      const existing = prev.find((i) => i.id === newItem.id && i.variant?.sku === newItem.variant?.sku)
+      const existing = prev.find((i) => i.id === newItem.id && i.variant?.name === newItem.variant?.name)
       if (existing) {
         return prev.map((i) => 
-          (i.id === newItem.id && i.variant?.sku === newItem.variant?.sku) 
+          (i.id === newItem.id && i.variant?.name === newItem.variant?.name) 
             ? { ...i, quantity: i.quantity + newItem.quantity } 
             : i
         )
@@ -76,13 +76,13 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     openCart() // Open drawer when item added
   }
 
-  const removeItem = (id: string, variantSku?: string) => {
-    setItems((prev) => prev.filter((i) => !(i.id === id && i.variant?.sku === variantSku)))
+  const removeItem = (id: string, variantName?: string) => {
+    setItems((prev) => prev.filter((i) => !(i.id === id && i.variant?.name === variantName)))
   }
 
-  const updateQuantity = (id: string, quantity: number, variantSku?: string) => {
+  const updateQuantity = (id: string, quantity: number, variantName?: string) => {
     setItems((prev) => 
-      prev.map((i) => (i.id === id && i.variant?.sku === variantSku ? { ...i, quantity: Math.max(1, quantity) } : i))
+      prev.map((i) => (i.id === id && i.variant?.name === variantName ? { ...i, quantity: Math.max(1, quantity) } : i))
     )
   }
 
