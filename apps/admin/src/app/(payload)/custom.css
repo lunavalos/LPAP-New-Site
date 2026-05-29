@@ -1,5 +1,8 @@
 /* Custom styles for Payload Admin */
-:root {
+
+/* Solo aplicar variables oscuras en el tema Dark */
+html[data-theme="dark"],
+[data-theme="dark"] {
   --theme-bg: #0f0f0f;
   --theme-text: #ffffff;
 }
