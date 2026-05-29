@@ -90,6 +90,13 @@ export const Products: CollectionConfig = {
           required: true,
         },
         {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          label: 'Imagen de la Variante (Opcional)',
+          required: false,
+        },
+        {
           name: 'price',
           type: 'number',
           required: true,

@@ -157,10 +157,10 @@ const PROGRAMS = [
 ]
 
 const IMPACT = [
-  { num: '10+', label: 'Programas Activos' },
-  { num: '2,400+', label: 'Familias Apoyadas' },
+  { num: '+800', label: 'Beneficiarios directos' },
+  { num: '+3,200', label: 'Beneficiarios indirectos' },
   { num: '14', label: 'Estados Atendidos' },
-  { num: '100%', label: 'Transparencia SAT' },
+  { num: '+2660', label: 'Totales' },
 ]
 
 /* ── Static hero fallback (shown if CMS has no hero block) ── */

@@ -183,6 +183,7 @@ export const Orders: CollectionConfig = {
       type: 'group',
       label: 'Información de Pago (Stripe)',
       admin: {
+        hidden: true,
         description: 'Datos generados automáticamente al procesar el pago con Stripe.',
       },
       fields: [

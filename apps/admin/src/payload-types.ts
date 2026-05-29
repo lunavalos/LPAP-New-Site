@@ -241,6 +241,7 @@ export interface Product {
     | {
         name: string;
         sku: string;
+        image?: (string | null) | Media;
         price: number;
         stock: number;
         id?: string | null;
@@ -719,6 +720,7 @@ export interface ProductsSelect<T extends boolean = true> {
     | {
         name?: T;
         sku?: T;
+        image?: T;
         price?: T;
         stock?: T;
         id?: T;

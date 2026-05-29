@@ -9,7 +9,7 @@ const PAYLOAD_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:300
 
 export default function ProductClient({ product }: { product: any }) {
   const { addItem } = useCart()
-  const [selectedVariant, setSelectedVariant] = useState(product.variants?.[0] || null)
+  const [selectedVariant, setSelectedVariant] = useState<any>(null)
   const [quantity, setQuantity] = useState(1)
   const [added, setAdded] = useState(false)
   const [activeImageIndex, setActiveImageIndex] = useState(0)
@@ -20,14 +20,32 @@ export default function ProductClient({ product }: { product: any }) {
     currency: 'MXN',
   }).format(currentPrice)
 
+  // Compile unique list of all images (product images + variant images)
+  const allImages = [...(product.images || [])]
+  product.variants?.forEach((v: any) => {
+    if (v.image && typeof v.image === 'object' && v.image.url) {
+      const exists = allImages.some((img: any) => img.image?.url === v.image.url)
+      if (!exists) {
+        allImages.push({
+          image: v.image,
+          id: v.id || v.image.id
+        })
+      }
+    }
+  })
+
   const handleAddToCart = () => {
+    const variantImageUrl = (selectedVariant?.image && typeof selectedVariant.image === 'object' && selectedVariant.image.url)
+      ? selectedVariant.image.url
+      : product.images?.[0]?.image?.url
+
     addItem({
       id: product.id,
       title: product.title,
       price: currentPrice,
       quantity: quantity,
       slug: product.slug,
-      imageUrl: product.images?.[0]?.image?.url,
+      imageUrl: variantImageUrl,
       variant: selectedVariant ? {
         name: selectedVariant.name,
         sku: selectedVariant.sku,
@@ -40,13 +58,26 @@ export default function ProductClient({ product }: { product: any }) {
 
   const handleSelectVariantAndAdd = (v: any) => {
     setSelectedVariant(v)
+
+    // Update active image index if the variant has a custom image
+    if (v.image && typeof v.image === 'object' && v.image.url) {
+      const idx = allImages.findIndex((img: any) => img.image?.url === v.image.url)
+      if (idx !== -1) {
+        setActiveImageIndex(idx)
+      }
+    }
+
+    const variantImageUrl = (v.image && typeof v.image === 'object' && v.image.url)
+      ? v.image.url
+      : product.images?.[0]?.image?.url
+
     addItem({
       id: product.id,
       title: product.title,
       price: v.price,
       quantity: quantity,
       slug: product.slug,
-      imageUrl: product.images?.[0]?.image?.url,
+      imageUrl: variantImageUrl,
       variant: {
         name: v.name,
         sku: v.sku,
@@ -57,7 +88,7 @@ export default function ProductClient({ product }: { product: any }) {
     setTimeout(() => setAdded(false), 2000)
   }
 
-  const activeImageUrl = product.images?.[activeImageIndex]?.image?.url || product.images?.[0]?.image?.url
+  const activeImageUrl = allImages[activeImageIndex]?.image?.url || product.images?.[0]?.image?.url
   const mainImage = activeImageUrl 
     ? (activeImageUrl.startsWith('http') ? activeImageUrl : `${PAYLOAD_URL}${activeImageUrl}`)
     : null
@@ -84,9 +115,9 @@ export default function ProductClient({ product }: { product: any }) {
                 <div className={styles.imagePlaceholder}>No hay imagen disponible</div>
               )}
             </div>
-            {product.images?.length > 1 && (
+            {allImages.length > 1 && (
               <div className={styles.thumbnails}>
-                {product.images.map((img: any, i: number) => {
+                {allImages.map((img: any, i: number) => {
                   const url = img?.image?.url
                   if (!url) return null
                   const src = url.startsWith('http') ? url : `${PAYLOAD_URL}${url}`
