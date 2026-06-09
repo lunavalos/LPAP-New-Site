@@ -138,7 +138,16 @@ export default function StripeWrapper({ children, shipping }: Props) {
   }
 
   // Carga dinámica de Stripe solo cuando hay clientSecret
-  return <StripeElementsWrapper clientSecret={clientSecret}>{children}</StripeElementsWrapper>
+  return (
+    <StripeElementsWrapper clientSecret={clientSecret}>
+      {React.Children.map(children, child => {
+        if (React.isValidElement(child)) {
+          return React.cloneElement(child, { clientSecret } as any)
+        }
+        return child
+      })}
+    </StripeElementsWrapper>
+  )
 }
 
 // ── Sub-componente con import dinámico de Stripe ──────────────────────────────

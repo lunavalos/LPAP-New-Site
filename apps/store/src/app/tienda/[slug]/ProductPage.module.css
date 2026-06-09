@@ -176,10 +176,16 @@
   cursor: pointer;
 }
 
-.quantitySelector span {
+.quantitySelector span,
+.quantityInput {
   width: 40px;
   text-align: center;
   font-weight: 700;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
 }
 
 .addBtn {

@@ -9,8 +9,8 @@ const PAYLOAD_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:300
 
 export default function ProductClient({ product }: { product: any }) {
   const { addItem } = useCart()
-  const [selectedVariant, setSelectedVariant] = useState<any>(null)
-  const [quantity, setQuantity] = useState(1)
+  const [selectedVariant, setSelectedVariant] = useState<any>(product.variants?.[0] || null)
+  const [quantityInput, setQuantityInput] = useState('1')
   const [added, setAdded] = useState(false)
   const [activeImageIndex, setActiveImageIndex] = useState(0)
 
@@ -43,7 +43,7 @@ export default function ProductClient({ product }: { product: any }) {
       id: product.id,
       title: product.title,
       price: currentPrice,
-      quantity: quantity,
+      quantity: parseInt(quantityInput, 10) || 1,
       slug: product.slug,
       imageUrl: variantImageUrl,
       variant: selectedVariant ? {
@@ -75,7 +75,7 @@ export default function ProductClient({ product }: { product: any }) {
       id: product.id,
       title: product.title,
       price: v.price,
-      quantity: quantity,
+      quantity: parseInt(quantityInput, 10) || 1,
       slug: product.slug,
       imageUrl: variantImageUrl,
       variant: {
@@ -167,9 +167,29 @@ export default function ProductClient({ product }: { product: any }) {
             {/* Quantity & Add to Cart */}
             <div className={styles.purchaseActions}>
               <div className={styles.quantitySelector}>
-                <button onClick={() => setQuantity(q => Math.max(1, q - 1))}>-</button>
-                <span>{quantity}</span>
-                <button onClick={() => setQuantity(q => q + 1)}>+</button>
+                <button onClick={() => setQuantityInput(q => Math.max(1, (parseInt(q, 10) || 1) - 1).toString())}>-</button>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  value={quantityInput}
+                  onChange={(e) => {
+                    const val = e.target.value
+                    if (val === '' || /^\d+$/.test(val)) {
+                      setQuantityInput(val)
+                    }
+                  }}
+                  onBlur={() => {
+                    const parsed = parseInt(quantityInput, 10)
+                    if (isNaN(parsed) || parsed < 1) {
+                      setQuantityInput('1')
+                    } else {
+                      setQuantityInput(parsed.toString())
+                    }
+                  }}
+                  className={styles.quantityInput}
+                />
+                <button onClick={() => setQuantityInput(q => ((parseInt(q, 10) || 1) + 1).toString())}>+</button>
               </div>
               <button 
                 className={`${styles.addBtn} ${added ? styles.added : ''}`} 

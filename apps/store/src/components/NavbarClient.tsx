@@ -27,10 +27,31 @@ export default function NavbarClient({ navItems, siteSettings }: NavbarClientPro
 
   const logoUrl = siteSettings?.logo?.url 
     ? `http://localhost:3000${siteSettings.logo.url}` 
-    : null
+    : '/lpap-logo.png'
 
   const { totalItems, toggleCart } = useCart()
   const { user } = useAuth()
+
+  // Verificar si ya existe contacto en los navItems
+  const hasContacto = navItems?.some((item: any) => {
+    const slug = item?.link?.reference?.slug || item?.link?.reference?.value?.slug || ''
+    const url = item?.link?.url || ''
+    const label = item?.link?.label?.toLowerCase() || ''
+    return slug === 'contacto' || url.includes('/contacto') || label === 'contacto'
+  })
+
+  const extendedNavItems = hasContacto 
+    ? navItems 
+    : [
+        ...(navItems || []),
+        {
+          link: {
+            type: 'custom',
+            url: '/contacto',
+            label: 'Contacto'
+          }
+        }
+      ]
 
   return (
     <>
@@ -47,7 +68,7 @@ export default function NavbarClient({ navItems, siteSettings }: NavbarClientPro
             </Link>
 
             <nav className={styles.navMenu}>
-              {navItems?.map((item: any, i: number) => {
+              {extendedNavItems?.map((item: any, i: number) => {
                 const slug = item.link.reference?.slug || ''
                 const href = item.link.type === 'reference' 
                   ? (slug === 'inicio' || slug === 'home' ? '/' : `/${slug}`) 
@@ -66,18 +87,10 @@ export default function NavbarClient({ navItems, siteSettings }: NavbarClientPro
                   <ShoppingBag size={22} />
                   {totalItems > 0 && <span className={styles.cartBadge}>{totalItems}</span>}
                 </button>
-                {user ? (
-                  <Link href="/app" className={styles.orangeBtn}>
-                    <User size={18} /> Mi Cuenta
-                  </Link>
-                ) : (
-                  <Link href="/login" className={styles.orangeBtn}>
-                    Iniciar Sesión
-                  </Link>
-                )}
                 <Link href="/donar" className={styles.donateBtn}>
                   Donar ahora
                 </Link>
+
               </div>
               
               <button className={styles.cartIconBtnMobile} onClick={toggleCart}>
@@ -93,7 +106,7 @@ export default function NavbarClient({ navItems, siteSettings }: NavbarClientPro
               <div className={`${styles.mobileOverlay} ${isOpen ? styles.overlayOpen : ''}`}>
                 <div className={styles.overlayContent}>
                   <nav className={styles.overlayNav}>
-                    {navItems?.map((item: any, i: number) => {
+                    {extendedNavItems?.map((item: any, i: number) => {
                       const slug = item.link.reference?.slug || ''
                       const href = item.link.type === 'reference' 
                         ? (slug === 'inicio' || slug === 'home' ? '/' : `/${slug}`) 
@@ -107,18 +120,10 @@ export default function NavbarClient({ navItems, siteSettings }: NavbarClientPro
                   </nav>
                   
                   <div className={styles.overlayFooter}>
-                    {user ? (
-                      <Link href="/app" className={styles.orangeBtn} onClick={() => setIsOpen(false)}>
-                        <User size={18} /> Mi Cuenta
-                      </Link>
-                    ) : (
-                      <Link href="/login" className={styles.orangeBtn} onClick={() => setIsOpen(false)}>
-                        Iniciar Sesión
-                      </Link>
-                    )}
                     <Link href="/donar" className={styles.donateBtn} onClick={() => setIsOpen(false)}>
                       Donar ahora
                     </Link>
+
                   </div>
                 </div>
               </div>

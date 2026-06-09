@@ -135,7 +135,7 @@
 
 .logoCard {
   background: #fdfdfd;
-  border-radius: 32px;
+  border-radius: 15px;
   padding: 20px 20px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(0, 0, 0, 0.03);
@@ -155,7 +155,8 @@
   width: 100%;
   height: auto;
   object-fit: contain;
-  border-radius: 32px;
+  border-radius: 10px;
+
 }
 
 .decorBlob {

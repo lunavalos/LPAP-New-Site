@@ -5,7 +5,7 @@ import Programs from '@/components/home/Programs'
 import FeaturedProducts from '@/components/home/FeaturedProducts'
 import CTA from '@/components/home/CTA'
 import Blocks from '@/components/Blocks'
-import ContactForm from '@/components/home/ContactForm'
+import ESRSection from '@/components/home/ESRSection'
 
 const PAYLOAD_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:3000'
 
@@ -55,15 +55,13 @@ export default async function HomePage() {
       <Mission />
       <Programs />
       <FeaturedProducts products={products} />
+      <ESRSection />
       <CTA />
 
       {/* ── 2. Dynamic Layout Blocks from Payload CMS (Hybrid Integration) ── */}
       {pageData?.layout && pageData.layout.length > 0 && (
         <Blocks layout={pageData.layout} products={products} />
       )}
-
-      {/* ── 3. Contact Form ── */}
-      <ContactForm />
     </main>
   )
 }

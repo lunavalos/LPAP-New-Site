@@ -317,7 +317,8 @@ export interface Order {
   shipping: number;
   taxes: number;
   total: number;
-  status: 'pending' | 'paid' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+  paymentStatus: 'pending' | 'paid' | 'failed' | 'refunded';
+  deliveryStatus: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
   shippingAddress: {
     street: string;
     city: string;
@@ -777,7 +778,8 @@ export interface OrdersSelect<T extends boolean = true> {
   shipping?: T;
   taxes?: T;
   total?: T;
-  status?: T;
+  paymentStatus?: T;
+  deliveryStatus?: T;
   shippingAddress?:
     | T
     | {

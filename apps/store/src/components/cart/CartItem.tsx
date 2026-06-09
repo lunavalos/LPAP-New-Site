@@ -14,6 +14,33 @@ interface CartItemProps {
 
 export default function CartItem({ item, layout = 'drawer' }: CartItemProps) {
   const { updateQuantity, removeItem } = useCart()
+  const [inputValue, setInputValue] = React.useState(item.quantity.toString())
+
+  React.useEffect(() => {
+    setInputValue(item.quantity.toString())
+  }, [item.quantity])
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value
+    if (val === '' || /^\d+$/.test(val)) {
+      setInputValue(val)
+      const parsed = parseInt(val, 10)
+      if (!isNaN(parsed) && parsed >= 1) {
+        updateQuantity(item.id, parsed, item.variant?.sku)
+      }
+    }
+  }
+
+  const handleBlur = () => {
+    const parsed = parseInt(inputValue, 10)
+    if (isNaN(parsed) || parsed < 1) {
+      setInputValue('1')
+      updateQuantity(item.id, 1, item.variant?.sku)
+    } else {
+      setInputValue(parsed.toString())
+      updateQuantity(item.id, parsed, item.variant?.sku)
+    }
+  }
 
   const formattedPrice = new Intl.NumberFormat('es-MX', {
     style: 'currency',
@@ -57,11 +84,19 @@ export default function CartItem({ item, layout = 'drawer' }: CartItemProps) {
         
         <div className={styles.itemFooter}>
           <div className={styles.quantity}>
-            <button onClick={() => updateQuantity(item.id, item.quantity - 1, item.variant?.name)}>
+            <button onClick={() => updateQuantity(item.id, item.quantity - 1, item.variant?.sku)}>
               <Minus size={14} />
             </button>
-            <span>{item.quantity}</span>
-            <button onClick={() => updateQuantity(item.id, item.quantity + 1, item.variant?.name)}>
+            <input
+              type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              value={inputValue}
+              onChange={handleInputChange}
+              onBlur={handleBlur}
+              className={styles.quantityInput}
+            />
+            <button onClick={() => updateQuantity(item.id, item.quantity + 1, item.variant?.sku)}>
               <Plus size={14} />
             </button>
           </div>

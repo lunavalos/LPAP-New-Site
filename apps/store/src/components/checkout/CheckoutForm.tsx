@@ -11,9 +11,10 @@ const PAYLOAD_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:300
 
 interface Props {
   shipping: number
+  clientSecret?: string
 }
 
-export default function CheckoutForm({ shipping }: Props) {
+export default function CheckoutForm({ shipping, clientSecret }: Props) {
   const router = useRouter()
   const { items, totalPrice, clearCart } = useCart()
   const { user, getAuthHeaders } = useAuth()
@@ -61,7 +62,7 @@ export default function CheckoutForm({ shipping }: Props) {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const createOrder = async (paymentIntentId: string) => {
+  const createOrder = async (paymentIntentId: string, initialStatus: 'pending' | 'paid' = 'pending') => {
     const orderData = {
       customer: {
         name: formData.name,
@@ -89,11 +90,12 @@ export default function CheckoutForm({ shipping }: Props) {
       shipping: shipping,
       taxes: 0,
       total: totalPrice + shipping,
-      status: 'paid',
+      paymentStatus: initialStatus,
+      deliveryStatus: initialStatus === 'paid' ? 'processing' : 'pending',
       account: user?.id || null,
       stripe: {
         paymentIntentId,
-        paymentStatus: 'succeeded',
+        paymentStatus: initialStatus === 'paid' ? 'succeeded' : 'pending',
       },
     }
 
@@ -117,22 +119,29 @@ export default function CheckoutForm({ shipping }: Props) {
       const stripeReady = key.startsWith('pk_') && !key.includes('REEMPLAZA') && key.length > 30
       const confirm = (formRef.current as any)?.__stripeConfirm
 
-      let paymentIntentId: string | null = null
+      let orderId: string | null = null
 
       if (stripeReady && confirm) {
-        // Confirmar pago con Stripe
-        paymentIntentId = await confirm()
-        if (!paymentIntentId) {
+        // 1. Crear la orden en Payload con estado 'pending' primero
+        const paymentIntentId = clientSecret?.split('_secret_')[0] || ''
+        const result = await createOrder(paymentIntentId, 'pending')
+        orderId = result.doc.id
+
+        // 2. Confirmar pago con Stripe
+        const confirmedId = await confirm()
+        if (!confirmedId) {
           // Error ya reportado por StripePaymentSection
           setLoading(false)
           return
         }
+      } else {
+        // Modo vista previa / sin Stripe configurado
+        const result = await createOrder('', 'paid')
+        orderId = result.doc.id
       }
 
-      // Crear la orden en Payload
-      const result = await createOrder(paymentIntentId || '')
       clearCart()
-      router.push(`/checkout/success?orderId=${result.doc.id}`)
+      router.push(`/checkout/success?orderId=${orderId}`)
     } catch (err: any) {
       setError(err.message || 'Ocurrió un error inesperado')
     } finally {
@@ -242,7 +251,6 @@ export default function CheckoutForm({ shipping }: Props) {
         </div>
       </div>
 
-      {/* ── Stripe Payment ── */}
       <StripePaymentSection
         formRef={formRef}
         onError={(msg) => setError(msg)}

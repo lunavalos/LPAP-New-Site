@@ -36,10 +36,19 @@ export default function OrdersPage() {
     currency: 'MXN',
   }).format(val)
 
-  const getStatusLabel = (status: string) => {
+  const getPaymentStatusLabel = (status: string) => {
     const statuses: any = {
       pending: { label: 'Pendiente', color: '#f4852b' },
       paid: { label: 'Pagado', color: '#00c853' },
+      failed: { label: 'Fallido', color: '#f44336' },
+      refunded: { label: 'Reembolsado', color: '#9c27b0' },
+    }
+    return statuses[status] || { label: status, color: '#888' }
+  }
+
+  const getDeliveryStatusLabel = (status: string) => {
+    const statuses: any = {
+      pending: { label: 'Pendiente', color: '#f4852b' },
       processing: { label: 'En proceso', color: '#2196f3' },
       shipped: { label: 'Enviado', color: '#9c27b0' },
       delivered: { label: 'Entregado', color: '#4caf50' },
@@ -66,7 +75,8 @@ export default function OrdersPage() {
       ) : (
         <div className={styles.ordersList}>
           {orders.map((order) => {
-            const status = getStatusLabel(order.status)
+            const payStatus = getPaymentStatusLabel(order.paymentStatus)
+            const delStatus = getDeliveryStatusLabel(order.deliveryStatus)
             const isExpanded = expandedOrderId === order.id
             return (
               <div key={order.id} className={styles.orderCard}>
@@ -77,8 +87,13 @@ export default function OrdersPage() {
                       {new Date(order.createdAt).toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' })}
                     </span>
                   </div>
-                  <div className={styles.orderStatus} style={{ color: status.color, background: `${status.color}15` }}>
-                    {status.label}
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    <div className={styles.orderStatus} style={{ color: payStatus.color, background: `${payStatus.color}15` }}>
+                      Pago: {payStatus.label}
+                    </div>
+                    <div className={styles.orderStatus} style={{ color: delStatus.color, background: `${delStatus.color}15` }}>
+                      Envío: {delStatus.label}
+                    </div>
                   </div>
                 </div>
 

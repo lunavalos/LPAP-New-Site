@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { getGlobal } from '@/lib/payload'
+import { getGlobal, getCategories } from '@/lib/payload'
 import { 
   Mail, 
   MapPin, 
@@ -15,10 +15,13 @@ import {
   BookOpen,
   Home,
   Users,
+  User,
   Layers,
   MessageSquare
 } from 'lucide-react'
 import styles from './Footer.module.css'
+
+const PAYLOAD_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:3000'
 
 function getNavIcon(label: string, slug: string) {
   const normLabel = label.toLowerCase();
@@ -45,20 +48,44 @@ function getNavIcon(label: string, slug: string) {
   return <Sparkles size={14} color="#fff" style={{ opacity: 0.9 }} />;
 }
 
+function getCategoryIcon(slug: string) {
+  const norm = slug.toLowerCase()
+  if (norm.includes('accesorios')) return <Tag size={14} color="#fff" style={{ opacity: 0.9 }} />
+  if (norm.includes('termo') || norm.includes('bebida') || norm.includes('hogar') || norm.includes('cafe') || norm.includes('café')) {
+    return <Coffee size={14} color="#fff" style={{ opacity: 0.9 }} />
+  }
+  if (norm.includes('coleccionable') || norm.includes('pin') || norm.includes('llavero')) {
+    return <Sparkles size={14} color="#fff" style={{ opacity: 0.9 }} />
+  }
+  if (norm.includes('libro') || norm.includes('literatura') || norm.includes('revista')) {
+    return <BookOpen size={14} color="#fff" style={{ opacity: 0.9 }} />
+  }
+  return <Tag size={14} color="#fff" style={{ opacity: 0.9 }} />
+}
 export default async function Footer() {
   let siteSettings = null
   let navData = { navItems: [] }
+  let categoriesData = { docs: [] }
   try {
-    [siteSettings, navData] = await Promise.all([
+    const res = await Promise.allSettled([
       getGlobal('site-settings'),
-      getGlobal('header')
+      getGlobal('header'),
+      getCategories(100)
     ])
+    if (res[0].status === 'fulfilled') siteSettings = res[0].value
+    if (res[1].status === 'fulfilled') navData = res[1].value
+    if (res[2].status === 'fulfilled') categoriesData = res[2].value
   } catch (e) {
-    console.error('Footer: Error fetching site settings & header', e)
+    console.error('Footer: Error fetching data', e)
   }
 
   const { contact, socialLinks = [] } = siteSettings || {}
   const navItems = navData?.navItems || []
+  const categories = categoriesData?.docs || []
+
+  const logoUrl = siteSettings?.logo?.url 
+    ? (siteSettings.logo.url.startsWith('http') ? siteSettings.logo.url : `${PAYLOAD_URL}${siteSettings.logo.url}`)
+    : '/lpap-logo.png'
 
   // Extraer links dinámicos del panel de administración
   const fbLink = socialLinks.find((l: any) => l.platform === 'facebook')?.url || 'https://www.facebook.com/LPAPFIGHT/?locale=es_LA'
@@ -70,7 +97,9 @@ export default async function Footer() {
       <div className="container">
         <div className={styles.grid}>
           <div className={styles.col}>
-            <h3 className={styles.logoTitle}>LPAP A.C.</h3>
+            <div className={styles.logoWrapper}>
+              <img src={logoUrl} alt="LPAP Logo" className={styles.footerLogo} />
+            </div>
             <p className={styles.logoText}>
               Lucha Por Ángeles Pequeños A.C. es una organización dedicada a brindar apoyo a niños en situaciones vulnerables.
             </p>
@@ -118,6 +147,12 @@ export default async function Footer() {
                   </li>
                 )
               })}
+              <li>
+                <Link href="/login" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                  <User size={14} color="#fff" style={{ opacity: 0.9 }} />
+                  <span>Iniciar Sesión</span>
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -129,26 +164,14 @@ export default async function Footer() {
                   <ShoppingBag size={14} color="#fff" style={{ opacity: 0.9 }} /> <span>Todos los Productos</span>
                 </Link>
               </li>
-              <li>
-                <Link href="/tienda?category=accesorios" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                  <Tag size={14} color="#fff" style={{ opacity: 0.9 }} /> <span>Accesorios</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/tienda?category=hogar" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                  <Coffee size={14} color="#fff" style={{ opacity: 0.9 }} /> <span>Hogar y Termos</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/tienda?category=coleccionables" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                  <Sparkles size={14} color="#fff" style={{ opacity: 0.9 }} /> <span>Coleccionables</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/tienda?category=literatura" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                  <BookOpen size={14} color="#fff" style={{ opacity: 0.9 }} /> <span>Libros y Literatura</span>
-                </Link>
-              </li>
+              {categories.map((cat: any, idx: number) => (
+                <li key={idx}>
+                  <Link href={`/tienda?category=${cat.slug}`} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                    {getCategoryIcon(cat.slug)}
+                    <span>{cat.title}</span>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -174,7 +197,7 @@ export default async function Footer() {
         <div className={styles.avisos}>
           <div className={styles.copyright}>
             <p>© {new Date().getFullYear()} LPAP A.C. Todos los derechos reservados.</p>
-            <a href="/politicas-de-privacidad">Politicas de privacidad</a><br />
+            <a href="/politica-de-privacidad">Política de privacidad</a><br />
             <a href="/aviso-de-derechos-reservados">Aviso de derechos reservados</a>
           </div>
 

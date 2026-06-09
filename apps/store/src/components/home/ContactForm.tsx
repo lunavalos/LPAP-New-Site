@@ -22,8 +22,20 @@ export default function ContactForm() {
     e.preventDefault()
     setStatus('loading')
 
-    // Simulate sending message
-    setTimeout(() => {
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (!res.ok) {
+        const errorData = await res.json()
+        throw new Error(errorData.error || 'Error al enviar el mensaje')
+      }
+
       setStatus('success')
       setFormData({
         name: '',
@@ -32,7 +44,10 @@ export default function ContactForm() {
         interestedIn: 'Hacer una Donación',
         message: ''
       })
-    }, 1500)
+    } catch (err: any) {
+      console.error('Error al enviar mensaje:', err)
+      setStatus('error')
+    }
   }
 
   return (
@@ -180,6 +195,12 @@ export default function ContactForm() {
                       />
                     </div>
                   </div>
+
+                  {status === 'error' && (
+                    <p style={{ color: '#ff4d4f', fontSize: '13px', fontWeight: '750', margin: '0 0 16px 0' }}>
+                      ⚠️ Hubo un problema al enviar tu mensaje. Por favor, verifica tus datos e inténtalo de nuevo.
+                    </p>
+                  )}
 
                   <button 
                     type="submit" 

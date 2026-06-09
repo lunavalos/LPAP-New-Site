@@ -51,9 +51,37 @@ function StripeInner({ StripeHooks, onError, isSubmitting, setIsSubmitting, form
         if (!stripe || !elements) return null
         setIsSubmitting(true)
 
+        // Extraer los datos del formulario para enviarlos a Stripe
+        const form = formRef.current
+        const formData = new FormData(form)
+        const name = formData.get('name') as string
+        const email = formData.get('email') as string
+        const phone = formData.get('phone') as string
+        const street = formData.get('street') as string
+        const city = formData.get('city') as string
+        const state = formData.get('state') as string
+        const zipCode = formData.get('zipCode') as string
+
         const { error, paymentIntent } = await stripe.confirmPayment({
           elements,
           redirect: 'if_required',
+          confirmParams: {
+            return_url: `${window.location.origin}/checkout/success`,
+            payment_method_data: {
+              billing_details: {
+                name: name || undefined,
+                email: email || undefined,
+                phone: phone || undefined,
+                address: {
+                  line1: street || undefined,
+                  city: city || undefined,
+                  state: state || undefined,
+                  postal_code: zipCode || undefined,
+                  country: 'MX',
+                }
+              }
+            }
+          }
         })
 
         setIsSubmitting(false)
@@ -87,7 +115,14 @@ function StripeInner({ StripeHooks, onError, isSubmitting, setIsSubmitting, form
           onReady={() => setReady(true)}
           options={{
             layout: 'accordion',
-            defaultValues: { billingDetails: { address: { country: 'MX' } } },
+            fields: {
+              billingDetails: {
+                name: 'never',
+                email: 'never',
+                phone: 'never',
+                address: 'never',
+              }
+            }
           }}
         />
         {!ready && (

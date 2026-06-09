@@ -1,0 +1,67 @@
+/* ─── Contacto Page Stylesheet ─────────────────────────── */
+
+.hero {
+  position: relative;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #001233;
+  color: #fff;
+  overflow: hidden;
+  padding-top: 140px;
+  padding-bottom: 60px;
+  text-align: center;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 18, 51, 0.9) 0%, rgba(220, 93, 163, 0.45) 100%);
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.heroTag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: #fff;
+  background: rgba(220, 93, 163, 0.35);
+  padding: 6px 18px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(220, 93, 163, 0.55);
+}
+
+.heroTitle {
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 18px;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.heroAccent {
+  color: var(--accent);
+}
+
+.heroSub {
+  font-size: clamp(14px, 1.8vw, 17px);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.7;
+  max-width: 620px;
+  margin: 0 auto;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+}

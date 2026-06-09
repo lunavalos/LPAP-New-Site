@@ -79,3 +79,34 @@
 .carouselWrap::-webkit-scrollbar {
   display: none;
 }
+
+/* Category Filters */
+.filtersRow {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 48px;
+}
+
+.filterBtn {
+  padding: 10px 24px;
+  border-radius: 100px;
+  border: none;
+  background: #f4f7fa;
+  color: #555;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.filterBtn:hover {
+  background: #e8ecf1;
+  transform: translateY(-1px);
+}
+
+.filterBtnActive {
+  background: var(--primary, #f4852b) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 12px rgba(244, 133, 43, 0.2);
+}

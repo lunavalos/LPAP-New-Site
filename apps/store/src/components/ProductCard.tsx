@@ -58,7 +58,7 @@ export default function ProductCard({ title, price, slug, imageUrl, description,
         )}
 
         <Link href={`/tienda/${slug}`} className={styles.addToCart}>
-          Ver detalles
+          Comprar
         </Link>
       </div>
     </div>

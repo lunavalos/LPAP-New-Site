@@ -32,3 +32,11 @@ export async function getMedia(limit = 10) {
   if (!res.ok) throw new Error('Failed to fetch media')
   return res.json()
 }
+
+export async function getCategories(limit = 100) {
+  const res = await fetch(`${PAYLOAD_URL}/api/categories?limit=${limit}&depth=1`, {
+    cache: 'no-store',
+  })
+  if (!res.ok) throw new Error('Failed to fetch categories')
+  return res.json()
+}

@@ -1,0 +1,202 @@
+/* ── ESR Section — Centered Single-Column Layout ── */
+.section {
+  background: #ffffff;
+  padding: 120px 0;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+  gap: 48px;
+}
+
+/* ── Logo Container (At the Top) ── */
+.logoWrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logoInner {
+  border-radius: 24px;
+  overflow: hidden;
+  padding: 24px 32px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.04);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 320px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logoInner:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.06);
+}
+
+.logoImg {
+  max-width: 100%;
+  height: auto;
+  max-height: 120px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Decorative accent border bottom-left */
+.imageAccent {
+  position: absolute;
+  bottom: -12px;
+  left: -12px;
+  width: 40%;
+  height: 50%;
+  border-left: 3px solid var(--accent);
+  border-bottom: 3px solid var(--accent);
+  border-radius: 0 0 0 20px;
+  z-index: -1;
+  opacity: 0.65;
+}
+
+/* ── Content (Centered) ── */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.tag {
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent);
+  background: rgba(220, 93, 163, 0.08);
+  padding: 6px 16px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: clamp(28px, 3.5vw, 38px);
+  font-weight: 900;
+  line-height: 1.2;
+  color: var(--text);
+  margin-bottom: 18px;
+  letter-spacing: -0.02em;
+}
+
+.accent {
+  color: var(--primary);
+}
+
+.leadText {
+  font-size: 16px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 36px;
+  max-width: 720px;
+}
+
+.benefitsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 36px;
+  text-align: left; /* Keep card text readable (left-aligned) */
+}
+
+.benefitCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: #fbfbfd;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  border-radius: 18px;
+  padding: 18px 24px;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.benefitCard:hover {
+  transform: translateY(-2px);
+  border-color: rgba(220, 93, 163, 0.2);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.02);
+}
+
+.benefitIcon {
+  color: var(--primary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.benefitTitle {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.benefitDesc {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: linear-gradient(135deg, rgba(244, 133, 43, 0.04) 0%, rgba(220, 93, 163, 0.04) 100%);
+  border: 1.5px dashed rgba(244, 133, 43, 0.15);
+  border-radius: 18px;
+  padding: 20px 24px;
+  width: 100%;
+  text-align: left;
+}
+
+.calloutIcon {
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.calloutText {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Responsive design ── */
+@media (max-width: 600px) {
+  .section {
+    padding: 80px 0;
+  }
+  
+  .wrapper {
+    gap: 36px;
+  }
+
+  .logoInner {
+    max-width: 240px;
+    padding: 16px 24px;
+  }
+  
+  .callout {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}

@@ -35,10 +35,19 @@ export default function DashboardPage() {
     currency: 'MXN',
   }).format(val)
 
-  const getStatusLabel = (status: string) => {
+  const getPaymentStatusLabel = (status: string) => {
     const statuses: any = {
       pending: { label: 'Pendiente', color: '#f4852b' },
       paid: { label: 'Pagado', color: '#00c853' },
+      failed: { label: 'Fallido', color: '#f44336' },
+      refunded: { label: 'Reembolsado', color: '#9c27b0' },
+    }
+    return statuses[status] || { label: status, color: '#888' }
+  }
+
+  const getDeliveryStatusLabel = (status: string) => {
+    const statuses: any = {
+      pending: { label: 'Pendiente', color: '#f4852b' },
       processing: { label: 'En proceso', color: '#2196f3' },
       shipped: { label: 'Enviado', color: '#9c27b0' },
       delivered: { label: 'Entregado', color: '#4caf50' },
@@ -102,7 +111,8 @@ export default function DashboardPage() {
         ) : recentOrders.length > 0 ? (
           <div className={styles.recentOrdersList} style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginTop: '16px' }}>
             {recentOrders.map((order: any) => {
-              const status = getStatusLabel(order.status)
+              const payStatus = getPaymentStatusLabel(order.paymentStatus)
+              const delStatus = getDeliveryStatusLabel(order.deliveryStatus)
               const firstItem = order.items?.[0]
               const orderTitle = firstItem
                 ? (order.items.length > 1
@@ -132,16 +142,28 @@ export default function DashboardPage() {
                     <span style={{ fontWeight: '800', color: '#f4852b', fontSize: '14px' }}>
                       {formatPrice(order.total)}
                     </span>
-                    <span style={{
-                      padding: '4px 10px',
-                      borderRadius: '8px',
-                      fontSize: '11px',
-                      fontWeight: '800',
-                      color: status.color,
-                      background: `${status.color}12`
-                    }}>
-                      {status.label}
-                    </span>
+                    <div style={{ display: 'flex', gap: '6px' }}>
+                      <span style={{
+                        padding: '4px 10px',
+                        borderRadius: '8px',
+                        fontSize: '11px',
+                        fontWeight: '800',
+                        color: payStatus.color,
+                        background: `${payStatus.color}12`
+                      }}>
+                        Pago: {payStatus.label}
+                      </span>
+                      <span style={{
+                        padding: '4px 10px',
+                        borderRadius: '8px',
+                        fontSize: '11px',
+                        fontWeight: '800',
+                        color: delStatus.color,
+                        background: `${delStatus.color}12`
+                      }}>
+                        Envío: {delStatus.label}
+                      </span>
+                    </div>
                   </div>
                 </div>
               )

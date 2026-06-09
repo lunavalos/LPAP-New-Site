@@ -36,7 +36,7 @@ const METHODS = [
     sub: 'Tel. (844) 228-1480 · contacto@lpap.com.mx',
     bg: 'rgba(244,133,43,0.08)',
     color: 'var(--primary)',
-    href: null,
+    href: '/contacto',
   },
 ]
 

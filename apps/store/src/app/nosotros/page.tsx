@@ -85,7 +85,7 @@ export default async function NosotrosPage() {
             <div className={styles.imageWrapper}>
               <div className={styles.logoCard}>
                 <img
-                  src="../img/empapando-suenos.jpg"
+                  src="../img/empapando-suenos.webp"
                   alt="LPAP Nosotros"
                   className={styles.logoImage}
                 />

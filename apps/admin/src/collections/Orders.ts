@@ -4,7 +4,7 @@ export const Orders: CollectionConfig = {
   slug: 'orders',
   admin: {
     useAsTitle: 'orderName',
-    defaultColumns: ['orderName', 'total', 'status', 'createdAt'],
+    defaultColumns: ['orderName', 'total', 'paymentStatus', 'deliveryStatus', 'createdAt'],
     group: 'Ecommerce',
   },
   hooks: {
@@ -142,13 +142,29 @@ export const Orders: CollectionConfig = {
       ],
     },
     {
-      name: 'status',
+      name: 'paymentStatus',
       type: 'select',
+      label: 'Estado del Pago',
       defaultValue: 'pending',
       required: true,
       options: [
         { label: 'Pendiente', value: 'pending' },
         { label: 'Pagado', value: 'paid' },
+        { label: 'Fallido', value: 'failed' },
+        { label: 'Reembolsado', value: 'refunded' },
+      ],
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'deliveryStatus',
+      type: 'select',
+      label: 'Estado del Envío',
+      defaultValue: 'pending',
+      required: true,
+      options: [
+        { label: 'Pendiente', value: 'pending' },
         { label: 'En proceso', value: 'processing' },
         { label: 'Enviado', value: 'shipped' },
         { label: 'Entregado', value: 'delivered' },

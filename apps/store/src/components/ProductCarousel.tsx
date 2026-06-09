@@ -172,7 +172,7 @@ function Card({ product }: { product: Product }) {
             el.style.boxShadow = '0 4px 14px rgba(220,93,163,0.25)'
           }}
         >
-          Ver detalles
+          Comprar
         </Link>
       </div>
     </div>

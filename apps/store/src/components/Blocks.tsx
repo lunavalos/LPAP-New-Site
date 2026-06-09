@@ -2,6 +2,7 @@
 
 import React, { useRef } from 'react'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import { ArrowRight } from 'lucide-react'
 import ProductCard from './ProductCard'
 import RichText from './RichText'
@@ -111,6 +112,24 @@ function ProductGridBlock({ block, serverProducts }: { block: any; serverProduct
   // Si ya vienen productos del servidor, usarlos directamente sin fetch
   const [products, setProducts] = React.useState<any[]>(serverProducts || [])
   const [loading, setLoading] = React.useState(!serverProducts?.length)
+  const [categories, setCategories] = React.useState<any[]>([])
+  const [selectedCategoryId, setSelectedCategoryId] = React.useState<string>('all')
+
+  const searchParams = useSearchParams()
+  const categoryParam = searchParams ? searchParams.get('category') : null
+
+  React.useEffect(() => {
+    if (categoryParam && categories.length > 0) {
+      const found = categories.find(cat => cat.slug === categoryParam || cat.id === categoryParam)
+      if (found) {
+        setSelectedCategoryId(found.id)
+      } else {
+        setSelectedCategoryId(categoryParam)
+      }
+    } else if (!categoryParam) {
+      setSelectedCategoryId('all')
+    }
+  }, [categoryParam, categories])
 
   React.useEffect(() => {
     // Solo hacer fetch si no hay productos pre-cargados del servidor
@@ -142,17 +161,51 @@ function ProductGridBlock({ block, serverProducts }: { block: any; serverProduct
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  React.useEffect(() => {
+    fetch(`${PAYLOAD_URL}/api/categories?limit=100`)
+      .then(res => res.json())
+      .then(data => setCategories(data.docs || []))
+      .catch(err => console.error('[ProductGrid] Error fetching categories:', err))
+  }, [])
+
   if (loading) return <ProductGridSkeleton />
+
+  const filteredProducts = products.filter((p: any) => {
+    if (selectedCategoryId === 'all') return true
+    const pCatId = typeof p.category === 'object' ? p.category?.id : p.category
+    return pCatId === selectedCategoryId
+  })
 
   return (
     <section style={{ padding: '100px 0', background: '#fff' }}>
       <div className={styles.container}>
         {block.title && (
-          <div style={{ marginBottom: 60, textAlign: 'center' }}>
+          <div style={{ marginBottom: 40, textAlign: 'center' }}>
             <h2 className={styles.sectionTitle}>{block.title}</h2>
           </div>
         )}
-        {products.length === 0 ? (
+
+        {categories.length > 0 && (
+          <div className={styles.filtersRow}>
+            <button
+              onClick={() => setSelectedCategoryId('all')}
+              className={`${styles.filterBtn} ${selectedCategoryId === 'all' ? styles.filterBtnActive : ''}`}
+            >
+              Todos
+            </button>
+            {categories.map((cat: any) => (
+              <button
+                key={cat.id}
+                onClick={() => setSelectedCategoryId(cat.id)}
+                className={`${styles.filterBtn} ${selectedCategoryId === cat.id ? styles.filterBtnActive : ''}`}
+              >
+                {cat.title}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {filteredProducts.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '60px 0', color: '#aaa', fontSize: 16 }}>
             No hay productos disponibles en este momento.
           </div>
@@ -162,7 +215,7 @@ function ProductGridBlock({ block, serverProducts }: { block: any; serverProduct
             gridTemplateColumns: 'repeat(auto-fill, minmax(330px, 1fr))',
             gap: '56px 40px'
           }}>
-            {products.map((p: any, i: number) => {
+            {filteredProducts.map((p: any, i: number) => {
               const rawUrl = p.images?.[0]?.image?.url
               return (
                 <ProductCard

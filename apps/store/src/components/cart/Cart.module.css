@@ -183,11 +183,17 @@
   display: flex;
 }
 
-.quantity span {
+.quantity span,
+.quantityInput {
   font-weight: 700;
   font-size: 14px;
   min-width: 20px;
+  width: 28px;
   text-align: center;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: inherit;
 }
 
 .itemPrice {
@@ -320,6 +326,7 @@
 }
 
 .checkoutBtn {
+  display: block;
   width: 100%;
   padding: 18px;
   background: var(--primary);
@@ -330,6 +337,7 @@
   font-weight: 800;
   margin-top: 24px;
   cursor: pointer;
+  text-align: center;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
