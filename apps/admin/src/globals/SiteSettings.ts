@@ -5,6 +5,7 @@ export const SiteSettings: GlobalConfig = {
   label: 'Configuración del Sitio',
   access: {
     read: () => true,
+    update: ({ req: { user } }) => Boolean(user && user.collection === 'users'),
   },
   fields: [
     {

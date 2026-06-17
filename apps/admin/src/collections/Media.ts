@@ -5,6 +5,9 @@ export const Media: CollectionConfig = {
   upload: true,
   access: {
     read: () => true,
+    create: ({ req: { user } }) => Boolean(user && user.collection === 'users'),
+    update: ({ req: { user } }) => Boolean(user && user.collection === 'users'),
+    delete: ({ req: { user } }) => Boolean(user && user.collection === 'users'),
   },
   fields: [
     {

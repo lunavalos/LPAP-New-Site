@@ -5,6 +5,7 @@ export const Header: GlobalConfig = {
   label: 'Navegación Superior',
   access: {
     read: () => true,
+    update: ({ req: { user } }) => Boolean(user && user.collection === 'users'),
   },
   fields: [
     {
