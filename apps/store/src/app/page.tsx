@@ -7,7 +7,7 @@ import CTA from '@/components/home/CTA'
 import Blocks from '@/components/Blocks'
 import ESRSection from '@/components/home/ESRSection'
 
-const PAYLOAD_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:3000'
+const PAYLOAD_URL = process.env.PAYLOAD_INTERNAL_URL || process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:3000'
 
 export default async function HomePage() {
   let products: any[] = []

@@ -2,7 +2,7 @@ import React from 'react'
 import { notFound, redirect } from 'next/navigation'
 import PageClient from '@/components/PageClient'
 
-const PAYLOAD_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:3000'
+const PAYLOAD_URL = process.env.PAYLOAD_INTERNAL_URL || process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:3000'
 
 interface PageProps {
   params: Promise<{ slug: string }>

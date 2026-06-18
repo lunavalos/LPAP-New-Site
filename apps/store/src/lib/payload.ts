@@ -1,4 +1,4 @@
-const PAYLOAD_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:3000'
+const PAYLOAD_URL = process.env.PAYLOAD_INTERNAL_URL || process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:3000'
 
 export async function getGlobal(slug: string) {
   const res = await fetch(`${PAYLOAD_URL}/api/globals/${slug}?depth=2`, {

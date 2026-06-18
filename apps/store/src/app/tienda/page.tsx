@@ -1,7 +1,7 @@
 import React from 'react'
 import Blocks from '@/components/Blocks'
 
-const PAYLOAD_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:3000'
+const PAYLOAD_URL = process.env.PAYLOAD_INTERNAL_URL || process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:3000'
 
 export default async function TiendaPage() {
   let layout: any[] = []

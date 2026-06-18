@@ -4,7 +4,7 @@ import { Target, Eye, Sparkles, Heart, ArrowRight } from 'lucide-react'
 import Blocks from '@/components/Blocks'
 import styles from './Nosotros.module.css'
 
-const PAYLOAD_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:3000'
+const PAYLOAD_URL = process.env.PAYLOAD_INTERNAL_URL || process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:3000'
 
 /* ── Static fallback Hero (shown if CMS has no hero block) ── */
 function StaticHero() {

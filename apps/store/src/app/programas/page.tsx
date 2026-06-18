@@ -8,7 +8,7 @@ import Blocks from '@/components/Blocks'
 import ProgramsGrid from '@/components/ProgramsGrid'
 import styles from './Programas.module.css'
 
-const PAYLOAD_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:3000'
+const PAYLOAD_URL = process.env.PAYLOAD_INTERNAL_URL || process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:3000'
 
 const IMPACT = [
   { num: '+800', label: 'Beneficiarios directos' },
