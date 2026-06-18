@@ -27,11 +27,15 @@ export default buildConfig({
   cors: [
     'http://localhost:3000',
     'https://admin.lpap.com.mx',
+    'https://staging.lpap.com.mx',
+    'https://lpap.com.mx',
     process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3001'
   ],
   csrf: [
     'http://localhost:3000',
     'https://admin.lpap.com.mx',
+    'https://staging.lpap.com.mx',
+    'https://lpap.com.mx',
     process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3001'
   ],
   admin: {
