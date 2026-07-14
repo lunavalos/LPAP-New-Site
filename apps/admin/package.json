@@ -5,7 +5,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "cross-env NEXT_DISABLE_TURBOPACK=1 next dev",
+    "dev": "cross-env NEXT_DISABLE_TURBOPACK=1 next dev -p 3000",
     "dev:turbo": "next dev",
     "build": "next build",
     "start": "next start",
